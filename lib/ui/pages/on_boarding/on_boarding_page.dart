@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/onboarding.dart';
+import 'package:nws_huydq_ecommerce_flutter/router/router_config.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/on_boarding/on_boarding_cubit.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/on_boarding/widgets/image_boarding.dart';
 
 class OnBoardingPage extends StatelessWidget {
   const OnBoardingPage({super.key});
@@ -52,8 +56,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 600,
+          Expanded(
+            flex: 12,
             child: PageView.builder(
                 controller: pageController,
                 itemCount: 3,
@@ -68,14 +72,9 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Image.asset(
-                          contents[index].image,
-                          height: 400,
-                          width: double.infinity - 30,
-                          fit: BoxFit.fill,
-                        ),
+                        imageBoarding(context, contents[index].image),
                         const SizedBox(
-                          height: 40,
+                          height: 36,
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -85,11 +84,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                           ),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 16,
                         ),
                         Text(
                           contents[index].discription,
-                          style: AppTextStyle.blackS14,
+                          style: AppTextStyle.greyS14,
                           overflow: TextOverflow.clip,
                         ),
                       ],
@@ -97,38 +96,45 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   );
                 }),
           ),
-          const Spacer(),
-          Row(
-            children: [
-              const SizedBox(
-                width: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  3,
-                  (index) => buildDot(index, currentIndex, context),
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: [
+                const SizedBox(
+                  width: 15,
                 ),
-              ),
-              const Spacer(),
-              InkWell(
-                onTap: () {
-                  // currentIndex = currentIndex + 1;
-                  pageController.nextPage(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeOut,
-                  );
-                },
-                child: SvgPicture.asset(
-                  "assets/icons/next_icon.svg",
-                  height: 50,
-                  width: 50,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    3,
+                    (index) => buildDot(index, currentIndex, context),
+                  ),
                 ),
-              ),
-              const SizedBox(
-                width: 15,
-              ),
-            ],
+                const Spacer(),
+                InkWell(
+                  onTap: () {
+                    if (currentIndex == 2) {
+                      GoRouter.of(context).pushNamed(AppRouter.login);
+                    } else {
+                      setState(() {
+                        currentIndex = currentIndex + 1;
+                        pageController.nextPage(
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut);
+                      });
+                    }
+                  },
+                  child: SvgPicture.asset(
+                    AppSVGs.icNext,
+                    height: 80,
+                    width: 80,
+                  ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+              ],
+            ),
           ),
           const SizedBox(
             height: 30,
@@ -140,8 +146,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
 
   Container buildDot(int index, int curIndex, BuildContext context) {
     return Container(
-      height: 6,
-      width: curIndex == index ? 18 : 6,
+      height: 5,
+      width: curIndex == index ? 20 : 5,
       margin: const EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),

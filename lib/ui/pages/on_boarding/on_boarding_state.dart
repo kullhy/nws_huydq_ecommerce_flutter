@@ -8,14 +8,13 @@ class OnBoardingState extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
-      ];
+  List<Object?> get props => [];
 
   OnBoardingState copyWith({
-  int? curIndex,
+    int? curIndex,
   }) {
     return OnBoardingState(
-      curIndex: curIndex?? this.curIndex,
+      curIndex: curIndex ?? this.curIndex,
     );
   }
 }

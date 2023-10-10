@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'app_colors.dart';
-
 class AppTextStyle {
-  static const blue = TextStyle(color: Color(0xff9cdbf1));
+  static const blue = TextStyle(color: Color.fromARGB(255, 0, 153, 208));
 
-  //s6
+  //s12
+  static final blueS16 = blue.copyWith(fontSize: 16);
+  static final blueS16Bold = blueS16.copyWith(fontWeight: FontWeight.bold);
+  static final blueS16W800 = blueS16.copyWith(fontWeight: FontWeight.w800);
+  //s12
   static final blueS12 = blue.copyWith(fontSize: 12);
   static final blueS12Bold = blueS12.copyWith(fontWeight: FontWeight.bold);
   static final blueS12W800 = blueS12.copyWith(fontWeight: FontWeight.w800);
@@ -23,11 +25,17 @@ class AppTextStyle {
   static final blackS8Bold = blackS8.copyWith(fontWeight: FontWeight.bold);
   static final blackS8W800 = blackS8.copyWith(fontWeight: FontWeight.w800);
 
-  //s12
+  //s10
   static final blackS10 =
       black.copyWith(fontSize: 10, fontWeight: FontWeight.w200);
   static final blackS10Bold = blackS10.copyWith(fontWeight: FontWeight.bold);
   static final blackS10W800 = blackS10.copyWith(fontWeight: FontWeight.w800);
+
+  //s11
+  static final blackS11 =
+      black.copyWith(fontSize: 11, fontWeight: FontWeight.w200);
+  static final blackS11Bold = blackS11.copyWith(fontWeight: FontWeight.bold);
+  static final blackS11W800 = blackS11.copyWith(fontWeight: FontWeight.w800);
 
   //s12
   static final blackS12 = black.copyWith(fontSize: 12);
@@ -100,7 +108,7 @@ class AppTextStyle {
   static final whiteS64W800 = whiteS64.copyWith(fontWeight: FontWeight.w800);
 
   ///Gray
-  static const grey = TextStyle(color: Colors.grey);
+  static const grey = TextStyle(color: Color.fromARGB(255, 88, 88, 88));
 
   //s12
   static final greyS12 = grey.copyWith(fontSize: 12);
@@ -123,7 +131,12 @@ class AppTextStyle {
   static final greyS18W800 = greyS18.copyWith(fontWeight: FontWeight.w800);
 
   ///Tint
-  static const tint = TextStyle(color: AppColors.secondary);
+  static const tint = TextStyle(color: Color.fromARGB(185, 96, 94, 94));
+
+  //s10
+  static final tintS10 = tint.copyWith(fontSize: 12);
+  static final tintS10Bold = tintS10.copyWith(fontWeight: FontWeight.bold);
+  static final tintS10W800 = tintS10.copyWith(fontWeight: FontWeight.w800);
 
   //s12
   static final tintS12 = tint.copyWith(fontSize: 12);
@@ -144,4 +157,12 @@ class AppTextStyle {
   static final tintS18 = tint.copyWith(fontSize: 18);
   static final tintS18Bold = tintS18.copyWith(fontWeight: FontWeight.bold);
   static final tintS18W800 = tintS18.copyWith(fontWeight: FontWeight.w800);
+
+  //errorText
+  static const errorText = TextStyle(color: Color.fromARGB(255, 255, 63, 63));
+
+  //s12
+  static final errortext14 = errorText.copyWith(fontSize: 14);
+  static final errorText14Bold =
+      errorText.copyWith(fontWeight: FontWeight.bold);
 }

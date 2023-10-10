@@ -1,22 +1,15 @@
 class AppSVGs {
-  //homePage
-  static const icNoti = 'assets/icons/noti_icon.svg';
-  static const icSearch = 'assets/icons/search_icon.svg';
-  static const icVoice = 'assets/icons/voice_icon.svg';
-  static const icGenres = 'assets/icons/genres_icon.svg';
-  static const icInTheatre = 'assets/icons/in_theatre_icon.svg';
-  static const icMovies = 'assets/icons/movies_icon.svg';
-  static const icTiviSeries = 'assets/icons/tivi_series_icon.svg';
-  static const icImdb = 'assets/icons/imdb.svg';
+  static const String icBack = "assets/icons/back_icon.svg";
+  static const String icNext = "assets/icons/next_icon.svg";
 
-  //bottomBar
-  static const icHome = 'assets/icons/home_icon.svg';
-  static const icFavorite = 'assets/icons/favorite_icon.svg';
-  static const icTicket = 'assets/icons/ticket_icon.svg';
-  static const icAccount = 'assets/icons/account_icon.svg';
-  static const icShuffle = 'assets/icons/shuffle_icon.svg';
+  //bottom bar
+  static const String icHome = "assets/icons/home_icon.svg";
+  static const String icCart = "assets/icons/cart_icon.svg";
+  static const String icNoti = "assets/icons/noti_icon.svg";
+  static const String icProfile = "assets/icons/profile_icon.svg";
 
-  //detailPage
-  static const icBack = "assets/icons/back_icon.svg";
-  static const isShare = "assets/icons/share_icon.svg";
+  //home
+  static const String icSearch = "assets/icons/search_icon.svg";
+  static const String icLove = "assets/icons/love_icon.svg";
+  static const String icWhiteLove = "assets/icons/white_love_icon.svg";
 }
