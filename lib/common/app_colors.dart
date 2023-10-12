@@ -18,4 +18,14 @@ class AppColors {
 
   //home
   static const Color searchBar = Color.fromARGB(40, 173, 171, 171);
+  static const Color star = Color.fromARGB(255, 255, 171, 7);
+  static const Color boderLine = Color.fromARGB(120, 202, 200, 200);
+
+  //product
+  static const List<Color> listColor = [
+    Colors.white,
+    Colors.black,
+    Color(0xffcadca7),
+    Color(0xfff79f1f),
+  ];
 }

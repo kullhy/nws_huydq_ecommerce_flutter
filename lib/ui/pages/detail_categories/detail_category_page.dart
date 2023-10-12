@@ -8,6 +8,7 @@ import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/detail_cate
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/components/product_item.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/detail_category_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/detail_category_navigator.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/widgets/search_bar/search_bar.dart';
 
 class DetailCategoryPage extends StatelessWidget {
   const DetailCategoryPage({super.key, required this.detailCategory});
@@ -47,79 +48,112 @@ class _DetailCategoryViewState extends State<DetailCategoryView> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: SvgPicture.asset(
-                      AppSVGs.icBack,
-                      height: 32,
-                      width: 32,
-                    ),
-                  ),
-                  SvgPicture.asset(
-                    AppSVGs.icSearch,
-                    height: 18,
-                    width: 18,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  _detailCategoryCubit.detailCategory.category,
-                  style: AppTextStyle.blackS18W800,
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              _detailCategoryCubit.detailCategory.products.isNotEmpty
-                  ? SingleChildScrollView(
-                      child: Wrap(
-                      alignment: WrapAlignment.start,
-                      spacing: size.width * 0.2 - 50,
-                      runSpacing: 16,
-                      children: List.generate(
-                          _detailCategoryCubit.detailCategory.products.length,
-                          (index) {
-                        return ProductItem(
-                          product: _detailCategoryCubit
-                              .detailCategory.products[index],
-                        );
-                      }),
-                    ))
-                  : Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "OPPS",
-                            style: AppTextStyle.blackS24W900,
-                          ),
-                          Image.asset(
-                            AppImages.noProduct,
-                            height: 120,
-                          )
-                        ],
+      backgroundColor: Colors.white,
+      body: SafeArea(child:
+          BlocBuilder<DetailCategoryCubit, DetailCategoryState>(
+              builder: (context, state) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: SvgPicture.asset(
+                        AppSVGs.icBack,
+                        height: 32,
+                        width: 32,
                       ),
                     ),
-            ],
+                    InkWell(
+                      onTap: _detailCategoryCubit.openSearchBar,
+                      child: state.isSearch
+                          ? const Icon(
+                              Icons.clear,
+                              size: 18,
+                            )
+                          : SvgPicture.asset(
+                              AppSVGs.icSearch,
+                              height: 18,
+                              width: 18,
+                            ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                state.isSearch
+                    ? SearchBarWidget(
+                        hintText: "Search Product",
+                        onChange: (keyword) {
+                          _detailCategoryCubit.searchProductByName(keyword);
+                        },
+                        ontap: () {
+                          _detailCategoryCubit.searchProductByName(
+                              _detailCategoryCubit
+                                  .searchEditingController.text);
+                        },
+                        textEditingController:
+                            _detailCategoryCubit.searchEditingController,
+                      )
+                    : Container(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    _detailCategoryCubit.detailCategory.category,
+                    style: AppTextStyle.blackS18W800,
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                state.products.isNotEmpty
+                    ? SingleChildScrollView(
+                        child: Wrap(
+                        alignment: WrapAlignment.start,
+                        spacing: size.width * 0.2 - 50,
+                        runSpacing: 16,
+                        children: List.generate(state.products.length, (index) {
+                          return ProductItem(
+                            product: state.products[index],
+                            ontap: () {
+                              state.products[index].category =
+                                  _detailCategoryCubit.detailCategory.category;
+                              _detailCategoryCubit
+                                  .openDetailProductPage(state.products[index]);
+                            },
+                          );
+                        }),
+                      ))
+                    : Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "OPPS",
+                              style: AppTextStyle.blackS24W900,
+                            ),
+                            Image.asset(
+                              AppImages.noProduct,
+                              height: 120,
+                            )
+                          ],
+                        ),
+                      ),
+              ],
+            ),
           ),
-        ),
-      )),
+        );
+      })),
     );
   }
 }

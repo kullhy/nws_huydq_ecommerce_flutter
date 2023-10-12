@@ -63,7 +63,15 @@ class _HomeViewState extends State<HomeView> {
                 height: 32,
               ),
               SearchBarWidget(
-                homeCubit: _homeCubit,
+                onChange: (keyword) {
+                  _homeCubit.searchCategoriesByName(keyword);
+                },
+                ontap: () {
+                  _homeCubit.searchCategoriesByName(
+                      _homeCubit.searchEditingController.text);
+                },
+                textEditingController: _homeCubit.searchEditingController,
+                hintText: "Search category",
               ),
               const SizedBox(
                 height: 20,

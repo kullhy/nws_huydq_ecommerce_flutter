@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 
 class CategoriesItem extends StatelessWidget {
-  const CategoriesItem({
-    super.key,
-    required this.itemName,
-    required this.itemImage,
-    required this.id,
-    required this.quantity, required this.ontap
-    
-  });
+  const CategoriesItem(
+      {super.key,
+      required this.itemName,
+      required this.itemImage,
+      required this.id,
+      required this.quantity,
+      required this.ontap});
   final String itemName;
   final String itemImage;
   final int id;
@@ -24,16 +24,23 @@ class CategoriesItem extends StatelessWidget {
       onTap: ontap,
       child: Stack(
         children: [
-          Container(
-            width: size.width * 0.4,
-            height: 150,
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                  image: NetworkImage(itemImage),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.network(
+              itemImage,
+              width: size.width * 0.4,
+              height: 150,
+              fit: BoxFit.cover,
+              errorBuilder: (BuildContext context, Object exception,
+                  StackTrace? stackTrace) {
+                return Image.network(
+                  AppImages.noImage,
+                  width: size.width * 0.4,
+                  height: 150,
                   fit: BoxFit.cover,
-                )),
+                );
+              },
+            ),
           ),
           Positioned(
             bottom: 0,
@@ -55,6 +62,7 @@ class CategoriesItem extends StatelessWidget {
                     child: Text(
                       itemName,
                       style: AppTextStyle.blackS18W800,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Text(

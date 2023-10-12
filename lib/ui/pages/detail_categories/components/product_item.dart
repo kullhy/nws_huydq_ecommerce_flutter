@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
@@ -8,31 +9,39 @@ class ProductItem extends StatelessWidget {
   const ProductItem({
     super.key,
     required this.product,
+    required this.ontap,
   });
   final Product product;
-
+  final Function() ontap;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return InkWell(
-      onTap: () {},
-      child: Container(
+      onTap: ontap,
+      child: SizedBox(
         // height: 220,
         width: size.width * 0.4,
         child: Column(
           children: [
             Stack(
               children: [
-                Container(
-                  width: size.width * 0.4,
-                  height: 150,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      image: DecorationImage(
-                        image: NetworkImage(product.images[0].toString()),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: Image.network(
+                    product.images[0].toString(),
+                    width: size.width * 0.4,
+                    height: 150,
+                    fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return Image.network(
+                        AppImages.noImage,
+                        width: size.width * 0.4,
+                        height: 150,
                         fit: BoxFit.cover,
-                      )),
+                      );
+                    },
+                  ),
                 ),
                 Positioned(
                   top: 16,

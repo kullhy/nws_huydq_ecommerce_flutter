@@ -20,9 +20,7 @@ class AppNavigator {
     GoRouter.of(context).pushReplacementNamed(AppRouter.login);
   }
 
-  void openPhotoView({required List<String> photoUrls}) {
-    GoRouter.of(context).push(AppRouter.photoView, extra: photoUrls);
-  }
+
 
   /// Show dialog
   Future<void> showSimpleDialog({

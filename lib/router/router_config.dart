@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/detail_category.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/detail_category_page.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/login/login_page.dart';
 
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/main/main_page.dart';
@@ -27,12 +29,7 @@ class AppRouter {
   static const String signUp = "SignUp";
   static const String signUpSuccessful = "signUpSuccessful";
   static const String detailCategory = "detailCategory";
-  static const String movieDetail = 'movieDetail';
-  static const String photoView = 'photoView';
-  static const String profile = 'profile';
-  static const String setting = 'setting';
-  static const String updateProfile = 'updateProfile';
-  static const String updateAvatar = 'updateAvatar';
+  static const String product = "product";
 
   // GoRouter configuration
   static final _routes = <RouteBase>[
@@ -79,6 +76,16 @@ class AppRouter {
         DetailCategory detailCategory = state.extra as DetailCategory;
         return DetailCategoryPage(
           detailCategory: detailCategory,
+        );
+      },
+    ),
+    GoRoute(
+      name: product,
+      path: "/$product",
+      builder: (context, state) {
+        Product product = state.extra as Product;
+        return DetailProductPage(
+          product: product,
         );
       },
     ),

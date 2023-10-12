@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_page.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/home/home_pages.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/widgets/bottom_bar/custom_bottom_bar.dart';
 
@@ -19,7 +19,7 @@ class _MainPageState extends State<MainPage> {
 
   List<Widget> listPage = [
     const HomePage(),
-    const DetailProductPage(),
+    const CartPage(),
     const HomePage(),
     const HomePage(),
   ];

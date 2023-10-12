@@ -12,4 +12,10 @@ class AppSVGs {
   static const String icSearch = "assets/icons/search_icon.svg";
   static const String icLove = "assets/icons/love_icon.svg";
   static const String icWhiteLove = "assets/icons/white_love_icon.svg";
+
+  //product
+  static const String icAddToCart = "assets/icons/add_to_cart_icon.svg";
+
+  //cart
+  static const String icCheckout = "assets/icons/check_out_icon.svg";
 }

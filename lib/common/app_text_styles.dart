@@ -94,6 +94,7 @@ class AppTextStyle {
 
   //s16
   static final whiteS16 = white.copyWith(fontSize: 16);
+  static final whiteS16w300 = whiteS16.copyWith(fontWeight: FontWeight.w300);
   static final whiteS16Bold = whiteS16.copyWith(fontWeight: FontWeight.bold);
   static final whiteS16W800 = whiteS16.copyWith(fontWeight: FontWeight.w800);
 
@@ -131,10 +132,21 @@ class AppTextStyle {
   static final greyS18W800 = greyS18.copyWith(fontWeight: FontWeight.w800);
 
   ///Tint
-  static const tint = TextStyle(color: Color.fromARGB(185, 96, 94, 94));
+  static const tint = TextStyle(color: Color.fromARGB(214, 116, 115, 115));
+
+  //s8
+  static final tintS8 = tint.copyWith(fontSize: 8);
+  static final tintS8Bold = tintS8.copyWith(fontWeight: FontWeight.bold);
+  static final tintS8W800 = tintS8.copyWith(fontWeight: FontWeight.w800);
+
+  
+  //s8
+  static final tintS9 = tint.copyWith(fontSize: 9);
+  static final tintS9Bold = tintS9.copyWith(fontWeight: FontWeight.bold);
+  static final tintS9W800 = tintS9.copyWith(fontWeight: FontWeight.w800);
 
   //s10
-  static final tintS10 = tint.copyWith(fontSize: 12);
+  static final tintS10 = tint.copyWith(fontSize: 10);
   static final tintS10Bold = tintS10.copyWith(fontWeight: FontWeight.bold);
   static final tintS10W800 = tintS10.copyWith(fontWeight: FontWeight.w800);
 

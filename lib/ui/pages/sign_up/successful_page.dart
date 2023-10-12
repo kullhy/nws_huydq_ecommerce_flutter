@@ -99,7 +99,7 @@ class _SuccessfulViewState extends State<SuccessfulView> {
             );
           }),
           SizedBox(
-            height: size.height * 0.1,
+            height: size.height * 0.09,
           ),
         ],
       ),
