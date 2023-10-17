@@ -6,13 +6,19 @@ import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/detail_cate
 import 'package:nws_huydq_ecommerce_flutter/router/router_config.dart';
 
 class DetailProductNavigator extends AppNavigator {
-  DetailProductNavigator({required BuildContext context}) : super(context: context);
+  DetailProductNavigator({required BuildContext context})
+      : super(context: context);
 
   void openDetailCategory(DetailCategory detailCategory) {
-    GoRouter.of(context).pushNamed(AppRouter.detailCategory,extra: detailCategory);
+    GoRouter.of(context)
+        .pushNamed(AppRouter.detailCategory, extra: detailCategory);
   }
 
   void openMainPage() {
-    GoRouter.of(context).pushReplacementNamed(AppRouter.main);
+    GoRouter.of(context).pushNamed(AppRouter.cart);
+  }
+
+  void openCartPage(){
+
   }
 }

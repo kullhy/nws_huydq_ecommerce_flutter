@@ -18,4 +18,10 @@ class AppSVGs {
 
   //cart
   static const String icCheckout = "assets/icons/check_out_icon.svg";
+
+  //profile
+  static const String icLanguage = "assets/icons/language_icon.svg";
+  static const String icDarkMode = "assets/icons/dark_mode_icon.svg";
+  static const String icHelpCenter = "assets/icons/help_center_icon.svg";
+  static const String icLogout = "assets/icons/logout_icon.svg";
 }

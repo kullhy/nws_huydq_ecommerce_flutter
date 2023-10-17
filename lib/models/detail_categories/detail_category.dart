@@ -7,14 +7,12 @@ class DetailCategory {
 
   DetailCategory({
     this.id = 0,
-    this.category="",
-    this.products =const [],
+    this.category = "",
+    this.products = const [],
   });
 
   factory DetailCategory.fromJson(Map<String, dynamic> json) {
-    return DetailCategory(
-      
-    );
+    return DetailCategory();
   }
 
   Map<String, dynamic> toJson() => {

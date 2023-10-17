@@ -6,6 +6,8 @@ class SharedPreferencesHelper {
 
   static const _authKey = '_authKey';
 
+  static const _cartIdKey = "cartIdKey";
+
   static const _didOnboardKey = 'onBoardingFlag';
 
   //Get onboard
@@ -25,20 +27,20 @@ class SharedPreferencesHelper {
   }
 
   //Get authKey
-  static Future<String> getApiTokenKey() async {
+  static Future<int> getCartId() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      return prefs.getString(_authKey) ?? "";
+      return prefs.getInt(_cartIdKey) ?? 0;
     } catch (e) {
       logger.e(e);
-      return "";
+      return 0;
     }
   }
 
   //Set authKey
-  static void setApiTokenKey(String apiTokenKey) async {
+  static void setCartId(int cartId) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(_authKey, apiTokenKey);
+    await prefs.setInt(_cartIdKey, cartId);
   }
 
   static void removeApiTokenKey() async {

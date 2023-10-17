@@ -32,7 +32,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     _splashCubit = context.read<SplashCubit>();
-    _splashCubit.checkLogin();
+    _splashCubit.checkLogin(context);
   }
 
   @override

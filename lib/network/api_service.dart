@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 
-
 class ApiService {
   var dio = Dio();
   var headers = {'Content-Type': 'application/json'};
@@ -26,6 +25,20 @@ class ApiService {
         headers: headers,
       ),
     );
+    return response;
+  }
+
+  Future<Response> getAPIWithToken(String url, String token) async {
+    var headers = {'Authorization': 'Bearer $token'};
+    var dio = Dio();
+    var response = await dio.request(
+      url,
+      options: Options(
+        method: 'GET',
+        headers: headers,
+      ),
+    );
+
     return response;
   }
 }

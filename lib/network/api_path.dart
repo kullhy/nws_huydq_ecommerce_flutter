@@ -10,5 +10,5 @@ class ApiPath {
   static const signUp = '/users/';
 
   static const listCategories = "/categories/";
-
+  static const profile = "/auth/profile";
 }

@@ -20,7 +20,15 @@ class DetailProductState extends Equatable {
   });
 
   @override
-  List<Object?> get props => [loadStatus, product, errorMessage, curIndex,sizeIndex,colorIndex,quantity];
+  List<Object?> get props => [
+        loadStatus,
+        product,
+        errorMessage,
+        curIndex,
+        sizeIndex,
+        colorIndex,
+        quantity
+      ];
 
   DetailProductState copyWith({
     LoadStatus? loadStatus,
@@ -29,16 +37,16 @@ class DetailProductState extends Equatable {
     int? curIndex,
     int? sizeIndex,
     int? colorIndex,
-    int?  quantity ,
+    int? quantity,
   }) {
     return DetailProductState(
       loadStatus: loadStatus ?? this.loadStatus,
       errorMessage: errorMessage ?? this.errorMessage,
       product: product ?? this.product,
       curIndex: curIndex ?? this.curIndex,
-      sizeIndex: sizeIndex?? this.sizeIndex,
-      colorIndex: colorIndex??this.colorIndex,
-      quantity: quantity??this.quantity,
+      sizeIndex: sizeIndex ?? this.sizeIndex,
+      colorIndex: colorIndex ?? this.colorIndex,
+      quantity: quantity ?? this.quantity,
     );
   }
 }

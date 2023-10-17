@@ -144,14 +144,16 @@ class ProductInfoWidget extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              r"$" "${product.price}",
+                              r"$" "${product.price * state.quantity}",
                               style: AppTextStyle.blackS18W800,
                             ),
                           ],
                         ),
                         const Spacer(),
                         InkWell(
-                          onTap: detailProductCubit.addToCart,
+                          onTap: () {
+                            detailProductCubit.addCart(context);
+                          },
                           child: Container(
                             width: 200,
                             height: 50,

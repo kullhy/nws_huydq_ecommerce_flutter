@@ -10,7 +10,7 @@ class Category {
     this.id = 0,
     this.name = "",
     this.image = "",
-    this.quantity=0,
+    this.quantity = 0,
     this.creationAt = "",
     this.updatedAt = "",
   });

@@ -4,14 +4,17 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_shadow.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
+import 'package:nws_huydq_ecommerce_flutter/main.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/components/product_info_widget.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_navigator.dart';
 
 class DetailProductPage extends StatelessWidget {
-  const DetailProductPage({super.key, required this.product});
+  const DetailProductPage({super.key, required this.product, this.productCart});
   final Product product;
+  final ProductCart? productCart;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class _DetailProductViewState extends State<DetailProductView> {
     _detailProductCubit = context.read<DetailProductCubit>();
     _detailProductCubit.pageController = PageController(initialPage: 1);
     _detailProductCubit.setProductCart();
+    _detailProductCubit.getData();
   }
 
   @override
@@ -121,17 +125,20 @@ class _DetailProductViewState extends State<DetailProductView> {
                           Positioned(
                             right: 0,
                             top: 0,
-                            child: Container(
-                                height: 16,
-                                width: 16,
-                                alignment: Alignment.center,
-                                decoration: const BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: Colors.black),
-                                child: Text(
-                                  "3",
-                                  style: AppTextStyle.whiteS10,
-                                )),
+                            child: InkWell(
+                              onTap: _detailProductCubit.openCartPage,
+                              child: Container(
+                                  height: 16,
+                                  width: 16,
+                                  alignment: Alignment.center,
+                                  decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.black),
+                                  child: Text(
+                                    "$quantityCart",
+                                    style: AppTextStyle.whiteS10,
+                                  )),
+                            ),
                           )
                         ],
                       ),
@@ -155,7 +162,7 @@ class _DetailProductViewState extends State<DetailProductView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
-                  3,
+                  state.product!.images.length,
                   (index) => buildDot(index, state.curIndex, context),
                 ),
               ),
