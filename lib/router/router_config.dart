@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/detail_category.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/detail_category_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/login/login_page.dart';
@@ -30,6 +32,8 @@ class AppRouter {
   static const String signUpSuccessful = "signUpSuccessful";
   static const String detailCategory = "detailCategory";
   static const String product = "product";
+  static const String cart = "cart";
+
 
   // GoRouter configuration
   static final _routes = <RouteBase>[
@@ -83,11 +87,25 @@ class AppRouter {
       name: product,
       path: "/$product",
       builder: (context, state) {
-        Product product = state.extra as Product;
+        Map<String, dynamic> data = state.extra as Map<String, dynamic>;
+        
+        Product product = data['product'] as Product;
+        ProductCart productCart = data['productCart'] as ProductCart;
         return DetailProductPage(
           product: product,
+          productCart: productCart,
         );
       },
+    ),
+     GoRoute(
+      name: cart,
+      path: "/$cart",
+      builder: (context, state) => const CartPage(),
+      pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+        context: context,
+        state: state,
+        child: const CartPage(),
+      ),
     ),
   ];
 }

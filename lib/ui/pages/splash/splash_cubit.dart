@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/secure_storage_helper.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/share_preferences_helper.dart';
@@ -16,11 +17,14 @@ class SplashCubit extends Cubit<SplashState> {
     // required this.appCubit,
   }) : super(const SplashState());
 
-  void checkLogin() async {
+  void checkLogin(BuildContext context) async {
     await Future.delayed(const Duration(seconds: 2));
-    // final token = await authRepo.getToken();
-    final token = await SecureStorageHelper().getToken();
+    
+    String? token = await SecureStorageHelper().getToken();
+  
+
     if (await SharedPreferencesHelper.isOnboardCompleted()) {
+      
       if (token != null) {
         navigator.openMainPage();
       } else {

@@ -48,6 +48,12 @@ dependencies:
   json_annotation: ^4.8.1
   another_flushbar: ^1.12.30
   dio: ^5.3.3
+  sqflite: ^2.3.0
+  path: ^1.8.3
+  flutter_slidable: ^3.0.0
+  firebase_core: ^2.17.0
+  firebase_storage: ^11.2.8
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:

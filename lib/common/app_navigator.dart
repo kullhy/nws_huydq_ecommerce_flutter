@@ -20,8 +20,6 @@ class AppNavigator {
     GoRouter.of(context).pushReplacementNamed(AppRouter.login);
   }
 
-
-
   /// Show dialog
   Future<void> showSimpleDialog({
     String title = "Alert",

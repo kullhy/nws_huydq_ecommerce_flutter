@@ -14,7 +14,7 @@ class DetailCategoryState extends Equatable {
   });
 
   @override
-  List<Object?> get props => [loadStatus, errorMessage, products,isSearch];
+  List<Object?> get props => [loadStatus, errorMessage, products, isSearch];
 
   DetailCategoryState copyWith({
     LoadStatus? loadStatus,
@@ -26,7 +26,7 @@ class DetailCategoryState extends Equatable {
       loadStatus: loadStatus ?? this.loadStatus,
       errorMessage: errorMessage ?? this.errorMessage,
       products: products ?? this.products,
-      isSearch: isSearch?? this.isSearch,
+      isSearch: isSearch ?? this.isSearch,
     );
   }
 }

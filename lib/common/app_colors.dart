@@ -28,4 +28,7 @@ class AppColors {
     Color(0xffcadca7),
     Color(0xfff79f1f),
   ];
+
+  //profile
+  static const Color iconBackground = Color.fromARGB(198, 223, 223, 223);
 }

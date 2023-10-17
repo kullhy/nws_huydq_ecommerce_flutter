@@ -4,13 +4,13 @@ import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 
-
 class SearchBarWidget extends StatelessWidget {
   const SearchBarWidget({
     super.key,
     required this.textEditingController,
     required this.ontap,
-    required this.onChange, required this.hintText,
+    required this.onChange,
+    required this.hintText,
   });
   final String hintText;
   final TextEditingController textEditingController;

@@ -9,7 +9,8 @@ class HomeNavigator extends AppNavigator {
   HomeNavigator({required BuildContext context}) : super(context: context);
 
   void openDetailCategory(DetailCategory detailCategory) {
-    GoRouter.of(context).pushNamed(AppRouter.detailCategory,extra: detailCategory);
+    GoRouter.of(context)
+        .pushNamed(AppRouter.detailCategory, extra: detailCategory);
   }
 
   void openMainPage() {

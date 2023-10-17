@@ -39,11 +39,13 @@ class AppTextStyle {
 
   //s12
   static final blackS12 = black.copyWith(fontSize: 12);
+  static final blackS12w500 = blackS12.copyWith(fontWeight: FontWeight.w500);
   static final blackS12Bold = blackS12.copyWith(fontWeight: FontWeight.bold);
   static final blackS12W800 = blackS12.copyWith(fontWeight: FontWeight.w800);
 
   //s14
   static final blackS14 = black.copyWith(fontSize: 14);
+  static final blackS14w500 = blackS14.copyWith(fontWeight: FontWeight.w500);
   static final blackS14Bold = blackS14.copyWith(fontWeight: FontWeight.bold);
   static final blackS14W800 = blackS14.copyWith(fontWeight: FontWeight.w800);
 
@@ -89,6 +91,7 @@ class AppTextStyle {
 
   //s14
   static final whiteS14 = white.copyWith(fontSize: 14);
+  static final whiteS14w500 = whiteS14.copyWith(fontWeight: FontWeight.w500);
   static final whiteS14Bold = whiteS14.copyWith(fontWeight: FontWeight.bold);
   static final whiteS14W800 = whiteS14.copyWith(fontWeight: FontWeight.w800);
 
@@ -139,7 +142,6 @@ class AppTextStyle {
   static final tintS8Bold = tintS8.copyWith(fontWeight: FontWeight.bold);
   static final tintS8W800 = tintS8.copyWith(fontWeight: FontWeight.w800);
 
-  
   //s8
   static final tintS9 = tint.copyWith(fontSize: 9);
   static final tintS9Bold = tintS9.copyWith(fontWeight: FontWeight.bold);

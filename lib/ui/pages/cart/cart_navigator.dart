@@ -1,0 +1,17 @@
+import 'package:flutter/cupertino.dart';
+
+import 'package:go_router/go_router.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_navigator.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
+import 'package:nws_huydq_ecommerce_flutter/router/router_config.dart';
+
+class CartNavigator extends AppNavigator {
+  CartNavigator({required BuildContext context}) : super(context: context);
+
+  void openDetailProduct(ProductCart productCart) {
+    Product product = productCart.product!;
+    GoRouter.of(context).pushNamed(AppRouter.product,
+        extra: {'product': product, 'productCart': productCart});
+  }
+}

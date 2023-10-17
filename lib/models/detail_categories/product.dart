@@ -4,7 +4,6 @@ class Product {
   int price;
   String description;
   List<dynamic> images;
-
   String category;
 
   Product({
@@ -13,7 +12,7 @@ class Product {
     this.price = 0,
     this.description = "",
     this.images = const [],
-    this.category="",
+    this.category = "",
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -33,4 +32,15 @@ class Product {
         'description': description,
         'images': images,
       };
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'price': price,
+      'description': description,
+      'images': images.join(','),
+      'category': category,
+    };
+  }
 }

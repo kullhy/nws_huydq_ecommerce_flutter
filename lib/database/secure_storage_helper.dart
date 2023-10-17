@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
 
 import 'share_preferences_helper.dart';
 
@@ -23,6 +24,7 @@ class SecureStorageHelper {
       final token = await _storage.read(key: "access_token");
       return token;
     } catch (e) {
+      logger.e(e);
       return null;
     }
   }

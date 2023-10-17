@@ -25,8 +25,8 @@ class HomeCubit extends Cubit<HomeState> {
 
   void openDetailCategory(int id) {
     DetailCategory? foundCategory = detailCategories.firstWhere(
-    (category) => category.id == id, // Trả về null nếu không tìm thấy
-  );
+      (category) => category.id == id, // Trả về null nếu không tìm thấy
+    );
     navigator.openDetailCategory(
       foundCategory,
     );
@@ -35,8 +35,8 @@ class HomeCubit extends Cubit<HomeState> {
   Future<void> getAllCategories() async {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
     try {
-      Response response =
-          await ApiService().getAPI(ApiPath.baseUrl + ApiPath.listCategories);
+      Response response = await ApiService().getAPI(
+          "${ApiPath.baseUrl}${ApiPath.listCategories}?offset=0&limit=10");
       logger.d(response.statusCode);
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
@@ -44,8 +44,7 @@ class HomeCubit extends Cubit<HomeState> {
         emit(state.copyWith(
             loadStatus: LoadStatus.success, categories: categories));
 
-        detailCategories =
-            categories.map((category) {
+        detailCategories = categories.map((category) {
           return DetailCategory(
             id: category.id,
             category: category.name,
@@ -69,7 +68,7 @@ class HomeCubit extends Cubit<HomeState> {
     for (int i = 0; i < detailCategories.length; i++) {
       var detailCategory = detailCategories[i];
       Response response = await ApiService().getAPI(
-          "${ApiPath.baseUrl}${ApiPath.listCategories}${detailCategory.id}/products"); // Gọi API để lấy danh sách sản phẩm dựa trên ID.
+          "${ApiPath.baseUrl}${ApiPath.listCategories}${detailCategory.id}/products?offset=0&limit=10"); // Gọi API để lấy danh sách sản phẩm dựa trên ID.
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         List<Product> products =
@@ -82,6 +81,8 @@ class HomeCubit extends Cubit<HomeState> {
       }
       emit(state.copyWith(
           loadStatus: LoadStatus.loadingMore, categories: categories));
+      emit(state.copyWith(
+          loadStatus: LoadStatus.success, categories: categories));
     }
   }
 
