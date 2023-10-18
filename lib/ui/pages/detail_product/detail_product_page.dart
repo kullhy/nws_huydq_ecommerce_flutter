@@ -7,6 +7,7 @@ import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/main.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/components/add_to_cart_widget.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/components/product_info_widget.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_navigator.dart';
@@ -36,7 +37,7 @@ class DetailProductView extends StatefulWidget {
   State<DetailProductView> createState() => _DetailProductViewState();
 }
 
-class _DetailProductViewState extends State<DetailProductView> {
+class _DetailProductViewState extends State<DetailProductView> with TickerProviderStateMixin {
   late DetailProductCubit _detailProductCubit;
 
   @override
@@ -46,6 +47,8 @@ class _DetailProductViewState extends State<DetailProductView> {
     _detailProductCubit.pageController = PageController(initialPage: 1);
     _detailProductCubit.setProductCart();
     _detailProductCubit.getData();
+   _detailProductCubit.addToCartPopUpAnimationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 800));
   }
 
   @override
@@ -174,6 +177,7 @@ class _DetailProductViewState extends State<DetailProductView> {
                 detailProductCubit: _detailProductCubit,
               ),
             ),
+          addToCartPopUp(_detailProductCubit.addToCartPopUpAnimationController,_detailProductCubit.openCartPage),
           ],
         ),
       );

@@ -14,8 +14,15 @@ class AppCubit extends Cubit<AppState> {
   AppCubit() : super(const AppState());
 
   Future<void> getQuantityCart() async {
+    while (userId == 0) {
+      // nếu userId == 0 thì chờ 4s
+      await Future.delayed(const Duration(seconds: 3));
+      getQuantityCart();
+    }
+
     final dbHelper = DatabaseHelper.instance;
     List<ProductCart> productCarts = await dbHelper.getProductCarts(userId);
+
     quantityCart = productCarts.length;
     log("check");
   }

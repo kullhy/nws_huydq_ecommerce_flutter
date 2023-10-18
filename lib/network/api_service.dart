@@ -28,6 +28,18 @@ class ApiService {
     return response;
   }
 
+  Future<Response> putAPI(String url, Object data) async {
+    var response = await dio.request(
+      url,
+      options: Options(
+        method: 'PUT',
+        headers: headers,
+      ),
+      data: data,
+    );
+    return response;
+  }
+
   Future<Response> getAPIWithToken(String url, String token) async {
     var headers = {'Authorization': 'Bearer $token'};
     var dio = Dio();

@@ -64,10 +64,7 @@ class _MainViewState extends State<MainView> {
             onChangePage: (index) {
               _mainCubit.changePage(index);
             }),
-        body: IndexedStack(
-          index: state.curIndex,
-          children: _mainCubit.listPage,
-        ),
+        body: _mainCubit.listPage[state.curIndex]
       );
     });
   }

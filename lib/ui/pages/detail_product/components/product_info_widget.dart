@@ -275,7 +275,7 @@ class ProductInfoWidget extends StatelessWidget {
                 }),
               ),
             ),
-          )
+          ),
         ],
       );
     });

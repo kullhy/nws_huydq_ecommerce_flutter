@@ -41,6 +41,7 @@ class _ProfileViewState extends State<ProfileView> {
 
     _profileCubit = context.read<ProfileCubit>();
     _profileCubit.getProfile(context);
+    _profileCubit.context = context;
   }
 
   @override

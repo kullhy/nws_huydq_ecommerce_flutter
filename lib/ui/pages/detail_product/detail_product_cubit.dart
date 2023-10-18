@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -16,6 +18,9 @@ class DetailProductCubit extends Cubit<DetailProductState> {
   final DetailProductNavigator navigator;
   final Product product;
   final ProductCart? productCartRe;
+
+  late AnimationController addToCartPopUpAnimationController;
+
 
   DetailProductCubit(
       {required this.navigator, required this.product, this.productCartRe})
@@ -47,6 +52,11 @@ class DetailProductCubit extends Cubit<DetailProductState> {
     context.read<AppCubit>().getQuantityCart();
     emit(state.copyWith(loadStatus: LoadStatus.loadingMore));
     emit(state.copyWith(loadStatus: LoadStatus.success));
+    addToCartPopUpAnimationController.forward();
+    Timer(const Duration(seconds: 5), () {
+              addToCartPopUpAnimationController.reverse();
+            });
+    
   }
 
   void getData() async {
