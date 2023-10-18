@@ -8,6 +8,7 @@ class ApiPath {
 
   static const login = '/auth/login';
   static const signUp = '/users/';
+  static const updateUser = '/users/';
 
   static const listCategories = "/categories/";
   static const profile = "/auth/profile";

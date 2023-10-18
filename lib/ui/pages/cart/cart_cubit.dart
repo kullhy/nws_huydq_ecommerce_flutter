@@ -1,3 +1,4 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/sqlite.dart';
@@ -12,6 +13,7 @@ class CartCubit extends Cubit<CartState> {
   final CartNavigator navigator;
 
   CartCubit({required this.navigator}) : super(const CartState());
+
 
   final dbHelper = DatabaseHelper.instance;
 

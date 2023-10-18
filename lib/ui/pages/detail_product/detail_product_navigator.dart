@@ -14,11 +14,7 @@ class DetailProductNavigator extends AppNavigator {
         .pushNamed(AppRouter.detailCategory, extra: detailCategory);
   }
 
-  void openMainPage() {
+  void openCartPage() {
     GoRouter.of(context).pushNamed(AppRouter.cart);
-  }
-
-  void openCartPage(){
-
   }
 }
