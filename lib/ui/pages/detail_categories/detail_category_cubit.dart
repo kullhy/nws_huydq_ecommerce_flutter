@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/detail_category.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/detail_category_navigator.dart';
 
 part 'detail_category_state.dart';
@@ -26,6 +27,10 @@ class DetailCategoryCubit extends Cubit<DetailCategoryState> {
 
   void openDetailProductPage(Product product) {
     navigator.openDetailProduct(product);
+  }
+
+  void backToHome(BuildContext context){
+    context.read<CheckHomeCubit>().openHome();
   }
 
   void searchProductByName(String keyword) {

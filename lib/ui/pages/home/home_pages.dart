@@ -38,77 +38,80 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     _homeCubit = context.read<HomeCubit>();
+
     log("check ");
-    _homeCubit.getAllCategories();
+    _homeCubit.getAllCategories(context);
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: SvgPicture.asset(
-                  AppSVGs.icBack,
-                  height: 36,
-                  width: 36,
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: SvgPicture.asset(
+                    AppSVGs.icBack,
+                    height: 36,
+                    width: 36,
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              SearchBarWidget(
-                onChange: (keyword) {
-                  _homeCubit.searchCategoriesByName(keyword);
-                },
-                ontap: () {
-                  _homeCubit.searchCategoriesByName(
-                      _homeCubit.searchEditingController.text);
-                },
-                textEditingController: _homeCubit.searchEditingController,
-                hintText: "Search category",
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SingleChildScrollView(
-                child: BlocBuilder<HomeCubit, HomeState>(
-                    builder: (context, state) {
-                  if (state.loadStatus == LoadStatus.loading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return Container(
-                      alignment: Alignment.topLeft,
-                      child: Wrap(
-                        alignment: WrapAlignment.start,
-                        spacing: size.width * 0.2 - 50,
-                        runSpacing: 16,
-                        children:
-                            List.generate(state.categories.length, (index) {
-                          return CategoriesItem(
-                            ontap: () {
-                              _homeCubit.openDetailCategory(
-                                  state.categories[index].id);
-                            },
-                            id: state.categories[index].id,
-                            itemImage: state.categories[index].image,
-                            itemName: state.categories[index].name,
-                            quantity: state.categories[index].quantity,
-                          );
-                        }),
-                      ),
-                    );
-                  }
-                }),
-              ),
-            ],
+                const SizedBox(
+                  height: 32,
+                ),
+                SearchBarWidget(
+                  onChange: (keyword) {
+                    _homeCubit.searchCategoriesByName(keyword);
+                  },
+                  ontap: () {
+                    _homeCubit.searchCategoriesByName(
+                        _homeCubit.searchEditingController.text);
+                  },
+                  textEditingController: _homeCubit.searchEditingController,
+                  hintText: "Search category",
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SingleChildScrollView(
+                  child: BlocBuilder<HomeCubit, HomeState>(
+                      builder: (context, state) {
+                    if (state.loadStatus == LoadStatus.loading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else {
+                      return Container(
+                        alignment: Alignment.topLeft,
+                        child: Wrap(
+                          alignment: WrapAlignment.start,
+                          spacing: size.width * 0.2 - 50,
+                          runSpacing: 16,
+                          children:
+                              List.generate(state.categories.length, (index) {
+                            return CategoriesItem(
+                              ontap: () {
+                                _homeCubit.openDetailCategory(
+                                    state.categories[index].id,context);
+                              },
+                              id: state.categories[index].id,
+                              itemImage: state.categories[index].image,
+                              itemName: state.categories[index].name,
+                              quantity: state.categories[index].quantity,
+                            );
+                          }),
+                        ),
+                      );
+                    }
+                  }),
+                ),
+              ],
+            ),
           ),
         ),
       ),
