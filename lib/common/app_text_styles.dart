@@ -115,6 +115,11 @@ class AppTextStyle {
   static const grey = TextStyle(color: Color.fromARGB(255, 88, 88, 88));
 
   //s12
+  static final greyS11 = grey.copyWith(fontSize: 11);
+  static final greyS11Bold = greyS11.copyWith(fontWeight: FontWeight.bold);
+  static final greyS11W800 = greyS11.copyWith(fontWeight: FontWeight.w800);
+
+  //s12
   static final greyS12 = grey.copyWith(fontSize: 12);
   static final greyS12Bold = greyS12.copyWith(fontWeight: FontWeight.bold);
   static final greyS12W800 = greyS12.copyWith(fontWeight: FontWeight.w800);
@@ -151,6 +156,12 @@ class AppTextStyle {
   static final tintS10 = tint.copyWith(fontSize: 10);
   static final tintS10Bold = tintS10.copyWith(fontWeight: FontWeight.bold);
   static final tintS10W800 = tintS10.copyWith(fontWeight: FontWeight.w800);
+
+  //s12
+  static final tintS11 = tint.copyWith(fontSize: 11);
+  static final tintS11Bold = tintS11.copyWith(fontWeight: FontWeight.bold);
+  static final tintS11W800 = tintS11.copyWith(fontWeight: FontWeight.w800);
+
 
   //s12
   static final tintS12 = tint.copyWith(fontSize: 12);

@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/sqlite.dart';
@@ -14,14 +13,14 @@ class CartCubit extends Cubit<CartState> {
 
   CartCubit({required this.navigator}) : super(const CartState());
 
-
   final dbHelper = DatabaseHelper.instance;
+  List<ProductCart> productCarts = [];
 
   int totalPrice = 0;
 
   void getListCart() async {
     emit(state.copyWith(loadStatus: LoadStatus.initial));
-    List<ProductCart> productCarts = await dbHelper.getProductCarts(userId);
+    productCarts = await dbHelper.getProductCarts(userId);
     for (var productCart in productCarts) {
       await productCart.getProductDetails(dbHelper);
       totalPrice = totalPrice + productCart.totalPrice;
@@ -32,21 +31,44 @@ class CartCubit extends Cubit<CartState> {
         totalPrice: totalPrice));
   }
 
-  //  void addQuantity() {
-  //   quantity = quantity + 1;
-  //   productCart.quantity = quantity;
-  //   productCart.totalPrice = quantity * product.price;
-  //   emit(state.copyWith(quantity: quantity));
-  // }
+  Future<void> addQuantity(String productCartId) async {
+    emit(state.copyWith(loadStatus: LoadStatus.loadingMore));
+    for (int i = 0; i < productCarts.length; i++) {
+      if (productCarts[i].id == productCartId) {
+        productCarts[i].quantity = productCarts[i].quantity + 1;
+        totalPrice = totalPrice + productCarts[i].product!.price;
+        productCarts[i].totalPrice =
+            productCarts[i].quantity * productCarts[i].product!.price;
+        dbHelper.updateProductCart(productCarts[i]);
+      }
+    }
+    emit(state.copyWith(
+        loadStatus: LoadStatus.loadingMore, totalPrice: totalPrice));
+  }
 
-  // void subtractQuantity() {
-  //   if (quantity != 0) {
-  //     quantity = quantity - 1;
-  //     productCart.quantity = quantity;
-  //     productCart.totalPrice = quantity * product.price;
-  //     emit(state.copyWith(quantity: quantity));
-  //   }
-  // }
+  Future<void> subtractQuantity(String productCartId) async {
+    emit(state.copyWith(loadStatus: LoadStatus.loadingMore));
+    for (int i = 0; i < productCarts.length; i++) {
+      if (productCarts[i].id == productCartId) {
+        if (productCarts[i].quantity > 0) {
+          productCarts[i].quantity = productCarts[i].quantity - 1;
+          totalPrice = totalPrice - productCarts[i].product!.price;
+          productCarts[i].totalPrice =
+              productCarts[i].quantity * productCarts[i].product!.price;
+          dbHelper.updateProductCart(productCarts[i]);
+        }
+      }
+      if (productCarts[i].quantity == 0) {
+        dbHelper.deleteProductCart(productCartId);
+        productCarts = await dbHelper.getProductCarts(userId);
+        getListCart();
+      }
+    }
+    emit(
+        state.copyWith(loadStatus: LoadStatus.success, totalPrice: totalPrice));
+  }
+
+  void findProductCartById(String productCartId) {}
 
   void openProduct(ProductCart productCart) {
     navigator.openDetailProduct(productCart);

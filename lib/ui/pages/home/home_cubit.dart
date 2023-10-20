@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -9,8 +11,10 @@ import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dar
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_path.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_service.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/home/home_navigator.dart';
 import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
+import 'package:path/path.dart';
 
 import '../../../models/detail_categories/detail_category.dart';
 
@@ -23,16 +27,12 @@ class HomeCubit extends Cubit<HomeState> {
   List<DetailCategory> detailCategories = [];
   TextEditingController searchEditingController = TextEditingController();
 
-  void openDetailCategory(int id) {
-    DetailCategory? foundCategory = detailCategories.firstWhere(
-      (category) => category.id == id, // Trả về null nếu không tìm thấy
-    );
-    navigator.openDetailCategory(
-      foundCategory,
-    );
+  void openDetailCategory(int id, BuildContext context) {
+    log(id.toString());
+    context.read<CheckHomeCubit>().openDetailCategory(id);
   }
 
-  Future<void> getAllCategories() async {
+  Future<void> getAllCategories(BuildContext context) async {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
     try {
       Response response = await ApiService().getAPI(
@@ -52,7 +52,7 @@ class HomeCubit extends Cubit<HomeState> {
           );
         }).toList();
 
-        getDetailCategories();
+        getDetailCategories(context);
       } else {
         emit(state.copyWith(
             loadStatus: LoadStatus.failure,
@@ -64,8 +64,10 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> getDetailCategories() async {
+  Future<void> getDetailCategories(BuildContext context) async {
     for (int i = 0; i < detailCategories.length; i++) {
+         emit(state.copyWith(
+          loadStatus: LoadStatus.loadingMore));
       var detailCategory = detailCategories[i];
       Response response = await ApiService().getAPI(
           "${ApiPath.baseUrl}${ApiPath.listCategories}${detailCategory.id}/products?offset=0&limit=10"); // Gọi API để lấy danh sách sản phẩm dựa trên ID.
@@ -79,10 +81,10 @@ class HomeCubit extends Cubit<HomeState> {
       } else {
         // Xử lý lỗi nếu cần.
       }
-      emit(state.copyWith(
-          loadStatus: LoadStatus.loadingMore, categories: categories));
+   
       emit(state.copyWith(
           loadStatus: LoadStatus.success, categories: categories));
+      context.read<CheckHomeCubit>().detailCategories = detailCategories;
     }
   }
 

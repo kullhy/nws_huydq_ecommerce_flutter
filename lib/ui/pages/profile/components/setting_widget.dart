@@ -128,10 +128,10 @@ class _SettingWidgetState extends State<SettingWidget> {
               style: AppTextStyle.blackS14W800,
             ),
             const Spacer(),
-            Text(
-              "English",
-              style: AppTextStyle.tintS10,
-            ),
+            // Text(
+            //   "English",
+            //   style: AppTextStyle.tintS10,
+            // ),
             const SizedBox(
               width: 8,
             ),

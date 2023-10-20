@@ -37,7 +37,8 @@ class DetailProductView extends StatefulWidget {
   State<DetailProductView> createState() => _DetailProductViewState();
 }
 
-class _DetailProductViewState extends State<DetailProductView> with TickerProviderStateMixin {
+class _DetailProductViewState extends State<DetailProductView>
+    with TickerProviderStateMixin {
   late DetailProductCubit _detailProductCubit;
 
   @override
@@ -47,7 +48,7 @@ class _DetailProductViewState extends State<DetailProductView> with TickerProvid
     _detailProductCubit.pageController = PageController(initialPage: 1);
     _detailProductCubit.setProductCart();
     _detailProductCubit.getData();
-   _detailProductCubit.addToCartPopUpAnimationController = AnimationController(
+    _detailProductCubit.addToCartPopUpAnimationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 800));
   }
 
@@ -101,35 +102,35 @@ class _DetailProductViewState extends State<DetailProductView> with TickerProvid
                         width: 32,
                       ),
                     ),
-                    SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            bottom: 0,
-                            child: Container(
-                              height: 28,
-                              width: 28,
-                              padding: const EdgeInsets.all(7),
-                              decoration: BoxDecoration(
-                                  boxShadow: [AppShadow.productColor],
-                                  shape: BoxShape.circle,
-                                  color: Colors.white),
-                              child: SvgPicture.asset(
-                                AppSVGs.icAddToCart,
-                                height: 12,
-                                width: 12,
-                                colorFilter: const ColorFilter.mode(
-                                    Colors.black, BlendMode.srcIn),
+                    InkWell(
+                      onTap: _detailProductCubit.openCartPage,
+                      child: SizedBox(
+                        height: 30,
+                        width: 30,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              bottom: 0,
+                              child: Container(
+                                height: 28,
+                                width: 28,
+                                padding: const EdgeInsets.all(7),
+                                decoration: BoxDecoration(
+                                    boxShadow: [AppShadow.productColor],
+                                    shape: BoxShape.circle,
+                                    color: Colors.white),
+                                child: SvgPicture.asset(
+                                  AppSVGs.icAddToCart,
+                                  height: 12,
+                                  width: 12,
+                                  colorFilter: const ColorFilter.mode(
+                                      Colors.black, BlendMode.srcIn),
+                                ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            right: 0,
-                            top: 0,
-                            child: InkWell(
-                              onTap: _detailProductCubit.openCartPage,
+                            Positioned(
+                              right: 0,
+                              top: 0,
                               child: Container(
                                   height: 16,
                                   width: 16,
@@ -141,9 +142,9 @@ class _DetailProductViewState extends State<DetailProductView> with TickerProvid
                                     "$quantityCart",
                                     style: AppTextStyle.whiteS10,
                                   )),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -177,7 +178,9 @@ class _DetailProductViewState extends State<DetailProductView> with TickerProvid
                 detailProductCubit: _detailProductCubit,
               ),
             ),
-          addToCartPopUp(_detailProductCubit.addToCartPopUpAnimationController,_detailProductCubit.openCartPage),
+            addToCartPopUp(
+                _detailProductCubit.addToCartPopUpAnimationController,
+                _detailProductCubit.openCartPage),
           ],
         ),
       );

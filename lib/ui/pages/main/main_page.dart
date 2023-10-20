@@ -42,30 +42,29 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     return BlocBuilder<MainCubit, MainState>(builder: (context, state) {
       return Scaffold(
-        bottomNavigationBar: CustomBottomBar(
-            listBottomBarItem: [
-              BottomBarItem(
-                iconItem: AppSVGs.icHome,
-                title: 'Home',
-              ),
-              BottomBarItem(
-                iconItem: AppSVGs.icCart,
-                title: 'Cart',
-              ),
-              BottomBarItem(
-                iconItem: AppSVGs.icNoti,
-                title: 'Noti',
-              ),
-              BottomBarItem(
-                iconItem: AppSVGs.icProfile,
-                title: 'Profile',
-              ),
-            ],
-            onChangePage: (index) {
-              _mainCubit.changePage(index);
-            }),
-        body: _mainCubit.listPage[state.curIndex]
-      );
+          bottomNavigationBar: CustomBottomBar(
+              listBottomBarItem: [
+                BottomBarItem(
+                  iconItem: AppSVGs.icHome,
+                  title: 'Home',
+                ),
+                BottomBarItem(
+                  iconItem: AppSVGs.icCart,
+                  title: 'Cart',
+                ),
+                BottomBarItem(
+                  iconItem: AppSVGs.icNoti,
+                  title: 'Noti',
+                ),
+                BottomBarItem(
+                  iconItem: AppSVGs.icProfile,
+                  title: 'Profile',
+                ),
+              ],
+              onChangePage: (index) {
+                _mainCubit.changePage(index);
+              }),
+          body: _mainCubit.listPage[state.curIndex]);
     });
   }
 }

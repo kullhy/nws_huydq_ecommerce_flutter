@@ -8,6 +8,7 @@ import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_produ
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/login/login_page.dart';
 
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/main/main_page.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/notification/noti_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/on_boarding/on_boarding_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/sign_up/sign_up_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/sign_up/successful_page.dart';
@@ -33,7 +34,7 @@ class AppRouter {
   static const String detailCategory = "detailCategory";
   static const String product = "product";
   static const String cart = "cart";
-
+  static const String noti = "noti";
 
   // GoRouter configuration
   static final _routes = <RouteBase>[
@@ -88,7 +89,7 @@ class AppRouter {
       path: "/$product",
       builder: (context, state) {
         Map<String, dynamic> data = state.extra as Map<String, dynamic>;
-        
+
         Product product = data['product'] as Product;
         ProductCart productCart = data['productCart'] as ProductCart;
         return DetailProductPage(
@@ -97,7 +98,7 @@ class AppRouter {
         );
       },
     ),
-     GoRoute(
+    GoRoute(
       name: cart,
       path: "/$cart",
       builder: (context, state) => const CartPage(),
@@ -106,6 +107,11 @@ class AppRouter {
         state: state,
         child: const CartPage(),
       ),
+    ),
+    GoRoute(
+      name: noti,
+      path: "/$noti",
+      builder: (context, state) => const NotiPage(),
     ),
   ];
 }
@@ -124,5 +130,6 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
           opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
           child: child,
         );
-      });
+      },
+      );
 }
