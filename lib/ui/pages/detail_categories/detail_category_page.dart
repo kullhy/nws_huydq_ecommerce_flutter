@@ -118,22 +118,25 @@ class _DetailCategoryViewState extends State<DetailCategoryView> {
                 ),
                 state.products.isNotEmpty
                     ? SingleChildScrollView(
-                        child: Wrap(
-                        alignment: WrapAlignment.start,
-                        spacing: size.width * 0.2 - 50,
-                        runSpacing: 16,
-                        children: List.generate(state.products.length, (index) {
-                          return ProductItem(
-                            product: state.products[index],
-                            ontap: () {
-                              state.products[index].category =
-                                  _detailCategoryCubit.detailCategory.category;
-                              _detailCategoryCubit
-                                  .openDetailProductPage(state.products[index]);
-                            },
-                          );
-                        }),
-                      ))
+                        child: Container(
+                          alignment: Alignment.topLeft,
+                          child: Wrap(
+                          alignment: WrapAlignment.start,
+                          spacing: size.width * 0.2 - 50,
+                          runSpacing: 16,
+                          children: List.generate(state.products.length, (index) {
+                            return ProductItem(
+                              product: state.products[index],
+                              ontap: () {
+                                state.products[index].category =
+                                    _detailCategoryCubit.detailCategory.category;
+                                _detailCategoryCubit
+                                    .openDetailProductPage(state.products[index]);
+                              },
+                            );
+                          }),
+                                              ),
+                        ))
                     : Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

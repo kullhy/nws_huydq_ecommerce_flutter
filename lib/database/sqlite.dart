@@ -3,9 +3,12 @@ import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dar
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
+import '../models/notifications/notifications.dart';
+
 class DatabaseHelper {
   static const String tableProducts = 'products';
   static const String tableProductCarts = 'product_carts';
+  static const String tableNotifications = 'notifications';
 
   // ... (các cột và tên bảng)
 
@@ -50,6 +53,15 @@ class DatabaseHelper {
             totalPrice INTEGER
           )
         ''');
+        await db.execute('''
+      CREATE TABLE $tableNotifications (
+        id INTEGER PRIMARY KEY,
+        title TEXT,
+        subtitle TEXT,
+        image TEXT,
+        createDate TEXT
+      )
+    ''');
       },
     );
   }
@@ -114,33 +126,34 @@ class DatabaseHelper {
   }
 
   // Lấy danh sách sản phẩm trong giỏ hàng
- Future<List<ProductCart>> getProductCarts(int userId) async {
-  final db = await instance.database;
-  final List<Map<String, dynamic>> maps = await db.query(tableProductCarts);
+  Future<List<ProductCart>> getProductCarts(int userId) async {
+    final db = await instance.database;
+    final List<Map<String, dynamic>> maps = await db.query(tableProductCarts);
 
-  final List<ProductCart> productCarts = List.generate(maps.length, (i) {
-    return ProductCart(
-      id: maps[i]['id'],
-      productId: maps[i]['productId'],
-      sizeIndex: maps[i]['sizeIndex'],
-      colorIndex: maps[i]['colorIndex'],
-      quantity: maps[i]['quantity'],
-      userId: maps[i]['userId'],
-      totalPrice: maps[i]['totalPrice'],
-    );
-  });
+    final List<ProductCart> productCarts = List.generate(maps.length, (i) {
+      return ProductCart(
+        id: maps[i]['id'],
+        productId: maps[i]['productId'],
+        sizeIndex: maps[i]['sizeIndex'],
+        colorIndex: maps[i]['colorIndex'],
+        quantity: maps[i]['quantity'],
+        userId: maps[i]['userId'],
+        totalPrice: maps[i]['totalPrice'],
+      );
+    });
 
-  // Lọc danh sách để chỉ lấy những ProductCart có userId bằng 1.
-  final filteredProductCarts = productCarts.where((productCart) => productCart.userId == userId).toList();
+    // Lọc danh sách để chỉ lấy những ProductCart có userId bằng 1.
+    final filteredProductCarts = productCarts
+        .where((productCart) => productCart.userId == userId)
+        .toList();
 
-  return filteredProductCarts;
-}
-
+    return filteredProductCarts;
+  }
 
   Future<void> updateProductCart(ProductCart productCart) async {
     final db = await instance.database;
     await db.update(
-      tableProducts,
+      tableProductCarts,
       productCart.toMap(),
       where: 'id = ?',
       whereArgs: [productCart.id],
@@ -212,7 +225,7 @@ class DatabaseHelper {
   }
 
   // Xóa sản phẩm trong giỏ hàng theo ID
-  Future<void> deleteProductCart(int id) async {
+  Future<void> deleteProductCart(String id) async {
     final db = await instance.database;
     await db.delete(
       tableProductCarts,
@@ -226,4 +239,43 @@ class DatabaseHelper {
     final db = await instance.database;
     await db.delete(tableProductCarts);
   }
+
+  Future<int> insertNotification(NotiModel notification) async {
+    final db = await instance.database;
+    return await db.insert(tableNotifications, notification.toMap());
+  }
+
+  // Hàm lấy danh sách tất cả thông báo từ cơ sở dữ liệu
+Future<List<NotiModel>> getAllNotifications() async {
+  final db = await instance.database;
+  final List<Map<String, dynamic>> maps = await db.query(tableNotifications);
+  
+  return List.generate(maps.length, (i) {
+    return NotiModel.fromMap(maps[i]);
+  });
+}
+
+
+  // Hàm cập nhật thông báo trong cơ sở dữ liệu
+  Future<int> updateNotification(NotiModel notification) async {
+    final db = await instance.database;
+    return await db.update(
+      tableNotifications,
+      notification.toMap(),
+      where: 'id = ?',
+      whereArgs: [notification.id],
+    );
+  }
+
+  // Hàm xoá thông báo từ cơ sở dữ liệu
+  Future<int> deleteNotification(int id) async {
+    final db = await instance.database;
+    return await db.delete(
+      tableNotifications,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
+
 }

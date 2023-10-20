@@ -84,22 +84,26 @@ class _HomeViewState extends State<HomeView> {
                       child: CircularProgressIndicator(),
                     );
                   } else {
-                    return Wrap(
-                      alignment: WrapAlignment.start,
-                      spacing: size.width * 0.2 - 50,
-                      runSpacing: 16,
-                      children: List.generate(state.categories.length, (index) {
-                        return CategoriesItem(
-                          ontap: () {
-                            _homeCubit
-                                .openDetailCategory(state.categories[index].id);
-                          },
-                          id: state.categories[index].id,
-                          itemImage: state.categories[index].image,
-                          itemName: state.categories[index].name,
-                          quantity: state.categories[index].quantity,
-                        );
-                      }),
+                    return Container(
+                      alignment: Alignment.topLeft,
+                      child: Wrap(
+                        alignment: WrapAlignment.start,
+                        spacing: size.width * 0.2 - 50,
+                        runSpacing: 16,
+                        children:
+                            List.generate(state.categories.length, (index) {
+                          return CategoriesItem(
+                            ontap: () {
+                              _homeCubit.openDetailCategory(
+                                  state.categories[index].id);
+                            },
+                            id: state.categories[index].id,
+                            itemImage: state.categories[index].image,
+                            itemName: state.categories[index].name,
+                            quantity: state.categories[index].quantity,
+                          );
+                        }),
+                      ),
                     );
                   }
                 }),
