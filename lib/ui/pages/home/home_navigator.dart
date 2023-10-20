@@ -14,6 +14,6 @@ class HomeNavigator extends AppNavigator {
   }
 
   void openMainPage() {
-    GoRouter.of(context).pushReplacementNamed(AppRouter.main);
+    GoRouter.of(context).pushNamed(AppRouter.main);
   }
 }

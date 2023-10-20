@@ -33,7 +33,6 @@ class _MainViewState extends State<MainView> {
   @override
   void initState() {
     super.initState();
-
     _mainCubit = context.read<MainCubit>();
     _mainCubit.getProfile(context);
     context.read<AppCubit>().getQuantityCart();

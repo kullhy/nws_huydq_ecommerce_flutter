@@ -2,9 +2,9 @@ const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 admin.initializeApp();
 
-const string1 = "d-5j3Zl3TYOmgiYoRv_jI-:APA91bGc5cDAWQNbmIl5LO-iuIxbQhoC";
-const string2 = "Xvmins1rHaK08BU9WCeoARTnFiEG3xh3e-8tLepMGinprPyJ4V_9ZWJ";
-const string3 = "69NbEmxlxZZ8kRVtiYq0XcUz9ncyJxr0ON8TWYdoC5Xo56uR-NB1_";
+const string1 = "c_8ZQWmWQ8qKMUwcVr8AKj:APA91bGbear3SPwrLfE28afrZ1tRalqR";
+const string2 = "ygeEtrMJf0s902I-OkzTgOi5VINWKR3iee3tIKTFGsMsLNgr2g1YrAp";
+const string3 = "HGIXeDDjwHbMAdVbkKaA48I8eE4ZDIk_yI6uiohRaaEfcdJZQzWfK";
 
 const tockens = string1 + string2 + string3;
 
@@ -13,9 +13,8 @@ exports.sendCartChangeNotification = functions.database.ref("/isNoti")
       const beforeData = change.before.val(); // Giá trị trước khi thay đổi
       const afterData = change.after.val(); // Giá trị sau khi thay đổi
       if (beforeData !== afterData && afterData==true) {
-        const tokensSnapshot = await admin.database().ref("/token").once("value");
-        tokens = tokensSnapshot.val();
-        console.log(tokens)
+        // const tokensSnapshot = await admin.database().ref("/token").once("value");
+        // tokens = tokensSnapshot.val();
   
         const payload = {
           notification: {
@@ -23,8 +22,7 @@ exports.sendCartChangeNotification = functions.database.ref("/isNoti")
             body: `Bạn vừa đặt thành công đơn hàng mới`,
           },
         };
-        const tokens = tockens;
-        const response = await admin.messaging().sendToDevice(tokens, payload);
+        const response = await admin.messaging().sendToDevice(tockens, payload);
         const tokensToRemove = [];
         response.results.forEach((result, index) => {
           if (result.error) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
@@ -88,18 +89,34 @@ class _CartViewState extends State<CartView> {
                     const SizedBox(
                       height: 8,
                     ),
-                    SizedBox(
-                      height: size.height * 0.5,
-                      child: ListView.builder(
-                          itemCount: state.productCarts.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return CartItemWidget(
-                              size: size,
-                              productCart: state.productCarts[index],
-                              cartCubit: _cartCubit,
-                            );
-                          }),
-                    )
+                    state.productCarts.isEmpty
+                        ? Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "OPPS",
+                                  style: AppTextStyle.blackS24W900,
+                                ),
+                                Image.asset(
+                                  AppImages.noCart,
+                                  height: 120,
+                                )
+                              ],
+                            ),
+                          )
+                        : SizedBox(
+                            height: size.height * 0.5,
+                            child: ListView.builder(
+                                itemCount: state.productCarts.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return CartItemWidget(
+                                    size: size,
+                                    productCart: state.productCarts[index],
+                                    cartCubit: _cartCubit,
+                                  );
+                                }),
+                          )
                   ],
                 ),
               ),

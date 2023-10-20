@@ -130,5 +130,6 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
           opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
           child: child,
         );
-      });
+      },
+      );
 }

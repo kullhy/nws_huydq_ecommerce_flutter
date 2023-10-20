@@ -38,7 +38,7 @@ class CartCubit extends Cubit<CartState> {
         productCarts[i].quantity = productCarts[i].quantity + 1;
         totalPrice = totalPrice + productCarts[i].product!.price;
         productCarts[i].totalPrice =
-              productCarts[i].quantity * productCarts[i].product!.price;
+            productCarts[i].quantity * productCarts[i].product!.price;
         dbHelper.updateProductCart(productCarts[i]);
       }
     }
@@ -61,6 +61,7 @@ class CartCubit extends Cubit<CartState> {
       if (productCarts[i].quantity == 0) {
         dbHelper.deleteProductCart(productCartId);
         productCarts = await dbHelper.getProductCarts(userId);
+        getListCart();
       }
     }
     emit(

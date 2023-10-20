@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_huydq_ecommerce_flutter/blocs/app_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/blocs/setting/app_setting_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/router/router_config.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
           }),
           BlocProvider<AppSettingCubit>(create: (context) {
             return AppSettingCubit();
+          }),
+          BlocProvider<CheckHomeCubit>(create: (context) {
+            return CheckHomeCubit();
           }),
         ],
         child: BlocBuilder<AppSettingCubit, AppSettingState>(
