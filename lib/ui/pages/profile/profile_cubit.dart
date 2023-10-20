@@ -103,5 +103,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         content: Text("Successfully updated avatar"),
       ));
     } else {}
+    // ignore: use_build_context_synchronously
+    context!.read<MainCubit>().getProfile(context!);
   }
 }

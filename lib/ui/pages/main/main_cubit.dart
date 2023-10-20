@@ -10,6 +10,7 @@ import 'package:nws_huydq_ecommerce_flutter/network/api_path.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_service.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/home/home_pages.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/notification/noti_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/profile_page.dart';
 
 part 'main_state.dart';
@@ -24,7 +25,7 @@ class MainCubit extends Cubit<MainState> {
   List<Widget> listPage = [
     const HomePage(),
     const CartPage(),
-    const HomePage(),
+    const NotiPage(),
     const ProfilePage(),
   ];
 

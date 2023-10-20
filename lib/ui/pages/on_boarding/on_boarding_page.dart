@@ -114,7 +114,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 InkWell(
                   onTap: () {
                     if (currentIndex == 2) {
-                      GoRouter.of(context).pushNamed(AppRouter.login);
+                      GoRouter.of(context).pushReplacementNamed(AppRouter.login);
                     } else {
                       setState(() {
                         currentIndex = currentIndex + 1;

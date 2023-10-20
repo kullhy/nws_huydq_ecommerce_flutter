@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
@@ -91,7 +90,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       height: 2,
                     ),
                     SizedBox(
-                      width: widget.size.width * 0.4,
+                      width: widget.size.width * 0.5,
                       child: Text(
                         widget.productCart.product!.title,
                         style: AppTextStyle.blackS14Bold,
@@ -105,9 +104,64 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       maxLines: 2,
                     ),
                     const Spacer(),
-                    Text(
-                      r"$" "${widget.productCart.totalPrice}",
-                      style: AppTextStyle.blackS14W800,
+                    SizedBox(
+                      width: widget.size.width * 0.53,
+                      child: Row(
+                        children: [
+                          Text(
+                            r"$" "${widget.productCart.totalPrice}",
+                            style: AppTextStyle.blackS14W800,
+                          ),
+                          const Spacer(),
+                          Container(
+                            width: 70,
+                            height: 30,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30),
+                              color: AppColors.boderLine.withOpacity(0.3),
+                            ),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  const SizedBox(
+                                    width: 2,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      widget.cartCubit.subtractQuantity(
+                                          widget.productCart.id);
+                                    },
+                                    child: Text(
+                                      "−",
+                                      style: AppTextStyle.blackS18,
+                                    ),
+                                  ),
+                                  Text(
+                                    "${widget.productCart.quantity}",
+                                    style: AppTextStyle.blackS14,
+                                  ),
+                                  InkWell(
+                                    onTap: () {
+                                      widget.cartCubit
+                                          .addQuantity(widget.productCart.id);
+                                    },
+                                    child: Text(
+                                      "+",
+                                      style: AppTextStyle.blackS18,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 2,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     const SizedBox(
                       height: 2,
@@ -115,46 +169,6 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                   ],
                 ),
                 const Spacer(),
-                Container(
-                  width: 70,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(30),
-                    color: AppColors.boderLine.withOpacity(0.3),
-                  ),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        const SizedBox(
-                          width: 2,
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Text(
-                            "−",
-                            style: AppTextStyle.blackS18,
-                          ),
-                        ),
-                        Text(
-                          "${widget.productCart.quantity}",
-                          style: AppTextStyle.blackS14,
-                        ),
-                        InkWell(
-                          onTap: () {},
-                          child: Text(
-                            "+",
-                            style: AppTextStyle.blackS18,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 2,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
               ]),
             ),
           ),
