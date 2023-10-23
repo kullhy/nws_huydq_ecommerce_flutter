@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/detail_category.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_cubit.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/detail_category_page.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/pages/home/home_pages.dart';
 
 class CheckHomePage extends StatelessWidget {
   const CheckHomePage({super.key});
