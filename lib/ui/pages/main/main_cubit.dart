@@ -10,7 +10,7 @@ import 'package:nws_huydq_ecommerce_flutter/network/api_path.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_service.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_page.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/pages/home/home_pages.dart';
+
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/notification/noti_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/profile_page.dart';
 

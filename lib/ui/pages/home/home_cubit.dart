@@ -14,7 +14,6 @@ import 'package:nws_huydq_ecommerce_flutter/network/api_service.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/home/home_navigator.dart';
 import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
-import 'package:path/path.dart';
 
 import '../../../models/detail_categories/detail_category.dart';
 
