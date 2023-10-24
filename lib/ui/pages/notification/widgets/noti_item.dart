@@ -40,7 +40,7 @@ class NotiItem extends StatelessWidget {
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
-                    return Image.network(
+                    return Image.asset(
                       AppImages.noImage,
                       width: 84,
                       height: 150,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_huydq_ecommerce_flutter/blocs/app_cubit.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/bottom_bar_item/bottom_bar_item_model.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/main/main_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/widgets/bottom_bar/custom_bottom_bar.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/widgets/bottom_bar/model/bottom_bar_item_model.dart';
+
 
 class MainPage extends StatelessWidget {
   const MainPage({super.key});

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/secure_storage_helper.dart';
-import 'package:nws_huydq_ecommerce_flutter/main.dart';
+import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/profile/profile.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_path.dart';
@@ -38,7 +38,7 @@ class MainCubit extends Cubit<MainState> {
       Response response = await ApiService().getAPIWithToken(url, token);
       if (response.statusCode == 200) {
         profile = Profile.fromJson(response.data);
-        userId = profile.id;
+        GlobalData.instance.userId = profile.id;
       } else {}
     }
   }

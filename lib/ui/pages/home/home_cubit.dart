@@ -35,7 +35,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
     try {
       Response response = await ApiService().getAPI(
-          "${ApiPath.baseUrl}${ApiPath.listCategories}?offset=0&limit=10");
+          ApiPath.getListCategory);
       logger.d(response.statusCode);
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
@@ -69,7 +69,7 @@ class HomeCubit extends Cubit<HomeState> {
           loadStatus: LoadStatus.loadingMore));
       var detailCategory = detailCategories[i];
       Response response = await ApiService().getAPI(
-          "${ApiPath.baseUrl}${ApiPath.listCategories}${detailCategory.id}/products?offset=0&limit=10"); // Gọi API để lấy danh sách sản phẩm dựa trên ID.
+          ApiPath().getListProduct(detailCategory.id)); // Gọi API để lấy danh sách sản phẩm dựa trên ID.
       if (response.statusCode == 200) {
         final List<dynamic> data = response.data;
         List<Product> products =

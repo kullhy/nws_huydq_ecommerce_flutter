@@ -33,7 +33,7 @@ class CategoriesItem extends StatelessWidget {
               fit: BoxFit.cover,
               errorBuilder: (BuildContext context, Object exception,
                   StackTrace? stackTrace) {
-                return Image.network(
+                return Image.asset(
                   AppImages.noImage,
                   width: size.width * 0.4,
                   height: 150,

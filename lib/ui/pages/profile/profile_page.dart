@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
+
+import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/components/gender_widget.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/components/info_field.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/components/setting_widget.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/widgets/avatar_widget.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/widgets/gender_widget.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/widgets/info_field.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/widgets/setting_widget.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/profile_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/profile_navigator.dart';
 
@@ -65,29 +66,10 @@ class _ProfileViewState extends State<ProfileView> {
                           const SizedBox(
                             height: 50,
                           ),
-                          ClipRRect(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(16)),
-                            child: Image.network(
-                              state.imageUrl,
-                              width: 80,
-                              height: 80,
-                              fit: BoxFit.cover,
-                              errorBuilder: (BuildContext context,
-                                  Object exception, StackTrace? stackTrace) {
-                                return state.loadStatus ==
-                                        LoadStatus.loadingMore
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : Image.network(
-                                        AppImages.noImage,
-                                        width: 80,
-                                        height: 80,
-                                        fit: BoxFit.cover,
-                                      );
-                              },
-                            ),
+                          AvatarWidget(
+                            profileCubit: _profileCubit,
+                            imageUrl: state.imageUrl,
+                            loadStatus: state.loadStatus,
                           ),
                           const SizedBox(
                             height: 16,
@@ -102,22 +84,40 @@ class _ProfileViewState extends State<ProfileView> {
                           const SizedBox(
                             height: 20,
                           ),
-                          infoField(size, "Name",
-                              _profileCubit.nameEditingController),
+                          InfoField(
+                            size: size,
+                            name: "Name",
+                            textEditingController:
+                                _profileCubit.nameEditingController,
+                          ),
                           const SizedBox(
                             height: 12,
                           ),
-                          genderWidget(size),
+                          GenderWidget(size: size),
                           const SizedBox(
                             height: 12,
                           ),
-                          infoField(
-                              size, "Age", _profileCubit.ageEditingController),
+                          InfoField(
+                            size: size,
+                            name: "Age",
+                            textEditingController:
+                                _profileCubit.ageEditingController,
+                          ),
                           const SizedBox(
                             height: 12,
                           ),
-                          infoField(size, "Email",
-                              _profileCubit.emailEditingController),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                          InfoField(
+                            size: size,
+                            name: "Email",
+                            textEditingController:
+                                _profileCubit.emailEditingController,
+                          ),
+                          const SizedBox(
+                            height: 12,
+                          ),
                           const SizedBox(
                             height: 28,
                           ),
@@ -177,3 +177,5 @@ class _ProfileViewState extends State<ProfileView> {
     );
   }
 }
+
+

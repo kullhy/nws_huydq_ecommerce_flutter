@@ -40,7 +40,7 @@ class _SuccessfulViewState extends State<SuccessfulView> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
         children: [
           SizedBox(
             height: size.height * 0.35,
