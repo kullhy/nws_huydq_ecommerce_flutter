@@ -12,4 +12,10 @@ class ApiPath {
 
   static const listCategories = "/categories/";
   static const profile = "/auth/profile";
+
+  static const String getListCategory =
+      "$baseUrl$listCategories?offset=0&limit=10";
+  String getListProduct(int categoryId) {
+    return "$baseUrl$listCategories$categoryId/products?offset=0&limit=10";
+  }
 }

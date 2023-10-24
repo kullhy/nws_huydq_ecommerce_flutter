@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
 
@@ -34,7 +34,7 @@ class ProductItem extends StatelessWidget {
                     fit: BoxFit.cover,
                     errorBuilder: (BuildContext context, Object exception,
                         StackTrace? stackTrace) {
-                      return Image.network(
+                      return Image.asset(
                         AppImages.noImage,
                         width: size.width * 0.4,
                         height: 150,

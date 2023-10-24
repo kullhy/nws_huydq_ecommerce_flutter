@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/widgets/switch/switch_custom.dart';
 

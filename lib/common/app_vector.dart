@@ -24,4 +24,5 @@ class AppSVGs {
   static const String icDarkMode = "assets/icons/dark_mode_icon.svg";
   static const String icHelpCenter = "assets/icons/help_center_icon.svg";
   static const String icLogout = "assets/icons/logout_icon.svg";
+  static const String icEdit = "assets/icons/edit_icon.svg";
 }

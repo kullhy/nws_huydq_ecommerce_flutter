@@ -7,14 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/secure_storage_helper.dart';
-import 'package:nws_huydq_ecommerce_flutter/main.dart';
+import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/profile/profile.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_path.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_service.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/commons/app_dialog.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/main/main_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/profile_navigator.dart';
-import 'package:nws_huydq_ecommerce_flutter/ui/widgets/dialog/show_dialog.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 
 part 'profile_state.dart';
@@ -40,7 +41,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     ageEditingController.text = "21";
     emailEditingController.text = profile.email;
     imageUrl = profile.avatar;
-
+  
     emit(state.copyWith(loadStatus: LoadStatus.success, imageUrl: imageUrl));
   }
 
@@ -94,7 +95,8 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   Future<void> updateImage() async {
-    String url = "${ApiPath.baseUrl}${ApiPath.updateUser}$userId";
+    String url =
+        "${ApiPath.baseUrl}${ApiPath.updateUser}${GlobalData.instance.userId}";
     var data = json.encode({"avatar": imageUrl});
     Response response = await ApiService().putAPI(url, data);
     if (response.statusCode == 200) {

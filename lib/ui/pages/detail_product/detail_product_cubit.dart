@@ -7,14 +7,14 @@ import 'package:equatable/equatable.dart';
 import 'package:nws_huydq_ecommerce_flutter/blocs/app_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_string.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/sqlite.dart';
-import 'package:nws_huydq_ecommerce_flutter/main.dart';
+import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/notifications/notifications.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
 import 'package:nws_huydq_ecommerce_flutter/service/firebase_api.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_navigator.dart';
-import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
+
 
 part 'detail_product_state.dart';
 
@@ -78,19 +78,11 @@ class DetailProductCubit extends Cubit<DetailProductState> {
     dbHelper.insertNotification(notiModel);
   }
 
-  void getData() async {
-    try {
-      List<ProductCart> productCarts = await dbHelper.getProductCarts(userId);
-      logger.d(productCarts[0].sizeIndex);
-    } catch (e) {
-      logger.e(e);
-    }
-  }
 
   void setProductCart() {
     productCart.productId = product.id;
     productCart.totalPrice = product.price;
-    productCart.userId = userId;
+    productCart.userId = GlobalData.instance.userId;
   }
 
   void onChangedPage(value) {

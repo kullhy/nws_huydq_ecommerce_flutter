@@ -7,7 +7,7 @@ import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_cubit.dart';
 
-class CartItemWidget extends StatefulWidget {
+class CartItemWidget extends StatelessWidget {
   const CartItemWidget({
     super.key,
     required this.size,
@@ -20,18 +20,12 @@ class CartItemWidget extends StatefulWidget {
   final CartCubit cartCubit;
 
   @override
-  State<CartItemWidget> createState() => _CartItemWidgetState();
-}
-
-class _CartItemWidgetState extends State<CartItemWidget> {
-  void doNothing(BuildContext context) {}
-  @override
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.only(bottom: 20, left: 24, right: 24),
         child: InkWell(
           onTap: () {
-            widget.cartCubit.openProduct(widget.productCart);
+            cartCubit.openProduct(productCart);
           },
           child: Slidable(
             key: const ValueKey(0),
@@ -44,7 +38,7 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(12),
                       bottomRight: Radius.circular(12)),
-                  onPressed: doNothing,
+                  onPressed: cartCubit.doNothing,
                   backgroundColor: const Color(0xFFFE4A49),
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
@@ -65,15 +59,15 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
                   child: Image.network(
-                    widget.productCart.product!.images[0],
+                    productCart.product!.images[0],
                     width: 84,
                     height: 84,
                     fit: BoxFit.cover,
                     errorBuilder: (BuildContext context, Object exception,
                         StackTrace? stackTrace) {
-                      return Image.network(
+                      return Image.asset(
                         AppImages.noImage,
-                        width: widget.size.width * 0.4,
+                        width: size.width * 0.4,
                         height: 150,
                         fit: BoxFit.cover,
                       );
@@ -90,26 +84,26 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                       height: 2,
                     ),
                     SizedBox(
-                      width: widget.size.width * 0.5,
+                      width: size.width * 0.5,
                       child: Text(
-                        widget.productCart.product!.title,
+                        productCart.product!.title,
                         style: AppTextStyle.blackS14Bold,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     Text(
-                      widget.productCart.product!.category,
+                      productCart.product!.category,
                       style: AppTextStyle.tintS10Bold,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
                     ),
                     const Spacer(),
                     SizedBox(
-                      width: widget.size.width * 0.53,
+                      width: size.width * 0.53,
                       child: Row(
                         children: [
                           Text(
-                            r"$" "${widget.productCart.totalPrice}",
+                            r"$" "${productCart.totalPrice}",
                             style: AppTextStyle.blackS14W800,
                           ),
                           const Spacer(),
@@ -131,8 +125,8 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      widget.cartCubit.subtractQuantity(
-                                          widget.productCart.id);
+                                      cartCubit.subtractQuantity(
+                                          productCart.id);
                                     },
                                     child: Text(
                                       "−",
@@ -140,13 +134,13 @@ class _CartItemWidgetState extends State<CartItemWidget> {
                                     ),
                                   ),
                                   Text(
-                                    "${widget.productCart.quantity}",
+                                    "${productCart.quantity}",
                                     style: AppTextStyle.blackS14,
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      widget.cartCubit
-                                          .addQuantity(widget.productCart.id);
+                                      cartCubit
+                                          .addQuantity(productCart.id);
                                     },
                                     child: Text(
                                       "+",

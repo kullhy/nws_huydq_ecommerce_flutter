@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/bottom_bar_item/bottom_bar_item_model.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/widgets/bottom_bar/bottom_bar_item_widget.dart';
 
-import 'package:nws_huydq_ecommerce_flutter/ui/widgets/bottom_bar/model/bottom_bar_item_model.dart';
 
 class CustomBottomBar extends StatefulWidget {
   const CustomBottomBar({

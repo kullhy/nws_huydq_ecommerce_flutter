@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_shadow.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_svgs.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_cubit.dart';
 
