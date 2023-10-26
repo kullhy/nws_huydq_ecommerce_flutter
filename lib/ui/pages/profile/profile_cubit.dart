@@ -41,13 +41,13 @@ class ProfileCubit extends Cubit<ProfileState> {
     ageEditingController.text = "21";
     emailEditingController.text = profile.email;
     imageUrl = profile.avatar;
-  
+
     emit(state.copyWith(loadStatus: LoadStatus.success, imageUrl: imageUrl));
   }
 
   void logOut(BuildContext context) {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
-    showAlertDialog(
+    showCustomDialog(
       context: context,
       title: "Log Out",
       content: "Are you sure you want to log out",
@@ -58,6 +58,8 @@ class ProfileCubit extends Cubit<ProfileState> {
           () {
             emit(state.copyWith(loadStatus: LoadStatus.success));
             navigator.openLogin();
+            GlobalData.instance.quantityCart = 0;
+            GlobalData.instance.userId = 0;
           },
         );
       },

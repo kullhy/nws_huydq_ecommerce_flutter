@@ -54,119 +54,123 @@ class _DetailCategoryViewState extends State<DetailCategoryView> {
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: SafeArea(child:
-            BlocBuilder<DetailCategoryCubit, DetailCategoryState>(
-                builder: (context, state) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        body: SafeArea(
+          child: BlocBuilder<DetailCategoryCubit, DetailCategoryState>(
+            builder: (context, state) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          _detailCategoryCubit.backToHome(context);
-                        },
-                        child: SvgPicture.asset(
-                          AppSVGs.icBack,
-                          height: 32,
-                          width: 32,
+                      const SizedBox(
+                        height: 12,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              _detailCategoryCubit.backToHome(context);
+                            },
+                            child: SvgPicture.asset(
+                              AppSVGs.icBack,
+                              height: 32,
+                              width: 32,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: _detailCategoryCubit.openSearchBar,
+                            child: state.isSearch
+                                ? const Icon(
+                                    Icons.clear,
+                                    size: 18,
+                                  )
+                                : SvgPicture.asset(
+                                    AppSVGs.icSearch,
+                                    height: 18,
+                                    width: 18,
+                                  ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      state.isSearch
+                          ? SearchBarWidget(
+                              hintText: "Search Product",
+                              onChange: (keyword) {
+                                _detailCategoryCubit
+                                    .searchProductByName(keyword);
+                              },
+                              ontap: () {
+                                _detailCategoryCubit.searchProductByName(
+                                    _detailCategoryCubit
+                                        .searchEditingController.text);
+                              },
+                              textEditingController:
+                                  _detailCategoryCubit.searchEditingController,
+                            )
+                          : Container(),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          _detailCategoryCubit.detailCategory.category,
+                          style: AppTextStyle.blackS18W800,
                         ),
                       ),
-                      InkWell(
-                        onTap: _detailCategoryCubit.openSearchBar,
-                        child: state.isSearch
-                            ? const Icon(
-                                Icons.clear,
-                                size: 18,
-                              )
-                            : SvgPicture.asset(
-                                AppSVGs.icSearch,
-                                height: 18,
-                                width: 18,
-                              ),
+                      const SizedBox(
+                        height: 12,
                       ),
+                      state.products.isNotEmpty
+                          ? SingleChildScrollView(
+                              child: Container(
+                              alignment: Alignment.topLeft,
+                              child: Wrap(
+                                alignment: WrapAlignment.start,
+                                spacing: size.width * 0.2 - 50,
+                                runSpacing: 16,
+                                children: List.generate(state.products.length,
+                                    (index) {
+                                  return ProductItem(
+                                    product: state.products[index],
+                                    ontap: () {
+                                      state.products[index].category =
+                                          _detailCategoryCubit
+                                              .detailCategory.category;
+                                      _detailCategoryCubit
+                                          .openDetailProductPage(
+                                              state.products[index]);
+                                    },
+                                  );
+                                }),
+                              ),
+                            ))
+                          : Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "OPPS",
+                                    style: AppTextStyle.blackS24W900,
+                                  ),
+                                  Image.asset(
+                                    AppImages.noProduct,
+                                    height: 120,
+                                  )
+                                ],
+                              ),
+                            ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  state.isSearch
-                      ? SearchBarWidget(
-                          hintText: "Search Product",
-                          onChange: (keyword) {
-                            _detailCategoryCubit.searchProductByName(keyword);
-                          },
-                          ontap: () {
-                            _detailCategoryCubit.searchProductByName(
-                                _detailCategoryCubit
-                                    .searchEditingController.text);
-                          },
-                          textEditingController:
-                              _detailCategoryCubit.searchEditingController,
-                        )
-                      : Container(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      _detailCategoryCubit.detailCategory.category,
-                      style: AppTextStyle.blackS18W800,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 12,
-                  ),
-                  state.products.isNotEmpty
-                      ? SingleChildScrollView(
-                          child: Container(
-                          alignment: Alignment.topLeft,
-                          child: Wrap(
-                            alignment: WrapAlignment.start,
-                            spacing: size.width * 0.2 - 50,
-                            runSpacing: 16,
-                            children:
-                                List.generate(state.products.length, (index) {
-                              return ProductItem(
-                                product: state.products[index],
-                                ontap: () {
-                                  state.products[index].category =
-                                      _detailCategoryCubit
-                                          .detailCategory.category;
-                                  _detailCategoryCubit.openDetailProductPage(
-                                      state.products[index]);
-                                },
-                              );
-                            }),
-                          ),
-                        ))
-                      : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "OPPS",
-                                style: AppTextStyle.blackS24W900,
-                              ),
-                              Image.asset(
-                                AppImages.noProduct,
-                                height: 120,
-                              )
-                            ],
-                          ),
-                        ),
-                ],
-              ),
-            ),
-          );
-        })),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

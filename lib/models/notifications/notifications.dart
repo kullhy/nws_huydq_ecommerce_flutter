@@ -5,22 +5,25 @@ class NotiModel {
   String subTitle;
   String image;
   DateTime? createDate;
+  int userId;
 
-  NotiModel({
-    this.id=0,
-     this.title="",
-     this.subTitle="",
-    this.image="",
-    this.createDate
-  });
+  NotiModel(
+      {this.id = 0,
+      this.title = "",
+      this.subTitle = "",
+      this.image = "",
+      this.userId =0,
+      this.createDate});
 
-   factory NotiModel.fromMap(Map<String, dynamic> map) {
+  factory NotiModel.fromMap(Map<String, dynamic> map) {
     return NotiModel(
       id: map['id'],
       title: map['title'],
       subTitle: map['subtitle'],
       image: map['image'],
-      createDate: map['createDate'] != null ? DateTime.parse(map['createDate']) : null,
+      userId: map['userId'],
+      createDate:
+          map['createDate'] != null ? DateTime.parse(map['createDate']) : null,
     );
   }
 
@@ -31,8 +34,9 @@ class NotiModel {
       'title': title,
       'subtitle': subTitle,
       'image': image,
-      'createDate': createDate?.toIso8601String(), // Chuyển ngày thành chuỗi ISO8601
+      'userId': userId,
+      'createDate':
+          createDate?.toIso8601String(), // Chuyển ngày thành chuỗi ISO8601
     };
   }
-
 }

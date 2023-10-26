@@ -61,22 +61,22 @@ class _DetailProductViewState extends State<DetailProductView>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return BlocBuilder<DetailProductCubit, DetailProductState>(
-        builder: (context, state) {
-      return WillPopScope(
-                onWillPop: () async {
-                  Navigator.pop(context,true);
-                  return false;
-                },
-        child: Scaffold(
-          body: Stack(
-            children: [
-              SizedBox(
-                height: size.height,
-                width: size.width,
-              ),
-              SizedBox(
-                height: size.height * 0.6,
-                child: PageView.builder(
+      builder: (context, state) {
+        return WillPopScope(
+          onWillPop: () async {
+            Navigator.pop(context, true);
+            return true;
+          },
+          child: Scaffold(
+            body: Stack(
+              children: [
+                SizedBox(
+                  height: size.height,
+                  width: size.width,
+                ),
+                SizedBox(
+                  height: size.height * 0.6,
+                  child: PageView.builder(
                     controller: _detailProductCubit.pageController,
                     itemCount: state.product!.images.length,
                     onPageChanged: _detailProductCubit.onChangedPage,
@@ -87,55 +87,56 @@ class _DetailProductViewState extends State<DetailProductView>
                         width: double.infinity,
                         fit: BoxFit.cover,
                       );
-                    }),
-              ),
-              SafeArea(
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: SvgPicture.asset(
-                          AppSVGs.icBack,
-                          height: 32,
-                          width: 32,
+                    },
+                  ),
+                ),
+                SafeArea(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: SvgPicture.asset(
+                            AppSVGs.icBack,
+                            height: 32,
+                            width: 32,
+                          ),
                         ),
-                      ),
-                      InkWell(
-                        onTap: _detailProductCubit.openCartPage,
-                        child: SizedBox(
-                          height: 30,
-                          width: 30,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                bottom: 0,
-                                child: Container(
-                                  height: 28,
-                                  width: 28,
-                                  padding: const EdgeInsets.all(7),
-                                  decoration: BoxDecoration(
-                                      boxShadow: [AppShadow.productColor],
-                                      shape: BoxShape.circle,
-                                      color: Colors.white),
-                                  child: SvgPicture.asset(
-                                    AppSVGs.icAddToCart,
-                                    height: 12,
-                                    width: 12,
-                                    colorFilter: const ColorFilter.mode(
-                                        Colors.black, BlendMode.srcIn),
+                        InkWell(
+                          onTap: _detailProductCubit.openCartPage,
+                          child: SizedBox(
+                            height: 30,
+                            width: 30,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  bottom: 0,
+                                  child: Container(
+                                    height: 28,
+                                    width: 28,
+                                    padding: const EdgeInsets.all(7),
+                                    decoration: BoxDecoration(
+                                        boxShadow: [AppShadow.productColor],
+                                        shape: BoxShape.circle,
+                                        color: Colors.white),
+                                    child: SvgPicture.asset(
+                                      AppSVGs.icAddToCart,
+                                      height: 12,
+                                      width: 12,
+                                      colorFilter: const ColorFilter.mode(
+                                          Colors.black, BlendMode.srcIn),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Positioned(
-                                right: 0,
-                                top: 0,
-                                child: Container(
+                                Positioned(
+                                  right: 0,
+                                  top: 0,
+                                  child: Container(
                                     height: 16,
                                     width: 16,
                                     alignment: Alignment.center,
@@ -145,51 +146,53 @@ class _DetailProductViewState extends State<DetailProductView>
                                     child: Text(
                                       "${GlobalData.instance.quantityCart}",
                                       style: AppTextStyle.whiteS10,
-                                    )),
-                              )
-                            ],
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: size.height * 0.5 + 20,
-                right: 30,
-                child: SvgPicture.asset(
-                  AppSVGs.icWhiteLove,
-                  height: 32,
-                  width: 32,
-                ),
-              ),
-              Positioned(
-                bottom: size.height * 0.5 + 20,
-                right: size.width * 0.5 - 22,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    state.product!.images.length,
-                    (index) => buildDot(index, state.curIndex, context),
+                Positioned(
+                  bottom: size.height * 0.5 + 20,
+                  right: 30,
+                  child: SvgPicture.asset(
+                    AppSVGs.icWhiteLove,
+                    height: 32,
+                    width: 32,
                   ),
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                child: ProductInfoWidget(
-                  size: size,
-                  detailProductCubit: _detailProductCubit,
+                Positioned(
+                  bottom: size.height * 0.5 + 20,
+                  right: size.width * 0.5 - 22,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      state.product!.images.length,
+                      (index) => buildDot(index, state.curIndex, context),
+                    ),
+                  ),
                 ),
-              ),
-              addToCartPopUp(
-                  _detailProductCubit.addToCartPopUpAnimationController,
-                  _detailProductCubit.openCartPage),
-            ],
+                Positioned(
+                  bottom: 0,
+                  child: ProductInfoWidget(
+                    size: size,
+                    detailProductCubit: _detailProductCubit,
+                  ),
+                ),
+                addToCartPopUp(
+                    _detailProductCubit.addToCartPopUpAnimationController,
+                    _detailProductCubit.openCartPage),
+              ],
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Container buildDot(int index, int curIndex, BuildContext context) {

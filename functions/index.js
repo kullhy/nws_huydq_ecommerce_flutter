@@ -6,15 +6,15 @@ const string1 = "c_8ZQWmWQ8qKMUwcVr8AKj:APA91bGbear3SPwrLfE28afrZ1tRalqR";
 const string2 = "ygeEtrMJf0s902I-OkzTgOi5VINWKR3iee3tIKTFGsMsLNgr2g1YrAp";
 const string3 = "HGIXeDDjwHbMAdVbkKaA48I8eE4ZDIk_yI6uiohRaaEfcdJZQzWfK";
 
-const tockens = string1 + string2 + string3;
+let tockens = string1 + string2 + string3;
 
 exports.sendCartChangeNotification = functions.database.ref("/isNoti")
     .onUpdate(async (change, context) => {
       const beforeData = change.before.val(); // Giá trị trước khi thay đổi
       const afterData = change.after.val(); // Giá trị sau khi thay đổi
-      if (beforeData !== afterData && afterData==true) {
+      if (beforeData !== afterData && afterData!="null") {
         // const tokensSnapshot = await admin.database().ref("/token").once("value");
-        // tokens = tokensSnapshot.val();
+        tockens = afterData;
   
         const payload = {
           notification: {

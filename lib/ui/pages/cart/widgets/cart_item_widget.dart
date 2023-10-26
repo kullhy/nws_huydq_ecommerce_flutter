@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:go_router/go_router.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_shadow.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/commons/app_dialog.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_cubit.dart';
 
 class CartItemWidget extends StatelessWidget {
@@ -31,15 +33,24 @@ class CartItemWidget extends StatelessWidget {
             key: const ValueKey(0),
             endActionPane: ActionPane(
               motion: const ScrollMotion(),
-              dismissible: DismissiblePane(onDismissed: () {}),
+              dismissible: null,
               children: [
                 SlidableAction(
                   autoClose: true,
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(12),
                       bottomRight: Radius.circular(12)),
-                  onPressed: cartCubit.doNothing,
-                  backgroundColor: const Color(0xFFFE4A49),
+                  onPressed: (BuildContext context) {
+                    showAlertDialog(
+                        content: "Are you sure you want to delete this cart",
+                        context: context,
+                        onConfirm: () {
+                          cartCubit.deleteProductCart(productCart.id);
+                          GoRouter.of(context).pop();
+                        },
+                        title: 'DELETE CART');
+                  },
+                  backgroundColor: AppColors.deleteBackground,
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
                   label: 'Delete',
@@ -125,8 +136,8 @@ class CartItemWidget extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      cartCubit.subtractQuantity(
-                                          productCart.id);
+                                      cartCubit
+                                          .subtractQuantity(productCart.id);
                                     },
                                     child: Text(
                                       "−",
@@ -139,8 +150,7 @@ class CartItemWidget extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      cartCubit
-                                          .addQuantity(productCart.id);
+                                      cartCubit.addQuantity(productCart.id);
                                     },
                                     child: Text(
                                       "+",

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:intl/intl.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/sqlite.dart';
+import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/notifications/notifications.dart';
 
@@ -15,7 +16,9 @@ class NotiCubit extends Cubit<NotiState> {
   List<NotiModel> notifications = [];
 
   Future<void> getNotis() async {
-    notifications = await dbHelper.getAllNotifications();
+    emit(state.copyWith(loadStatus: LoadStatus.loading));
+    notifications =
+        await dbHelper.getAllNotifications(GlobalData.instance.userId);
     emit(state.copyWith(
         loadStatus: LoadStatus.success, notifications: notifications));
   }

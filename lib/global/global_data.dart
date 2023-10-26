@@ -5,6 +5,6 @@ class GlobalData {
 
   int quantityCart = 0;
   int userId = 0;
-
-
+  String fCMToken = "";
+  bool isNoti = true;
 }

@@ -1,9 +1,11 @@
+import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/notifications/notifications.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-import '../models/notifications/notifications.dart';
+
 
 class DatabaseHelper {
   static const String tableProducts = 'products';
@@ -33,7 +35,7 @@ class DatabaseHelper {
       version: 1,
       onCreate: (db, version) async {
         await db.execute('''
-          CREATE TABLE $tableProducts (
+          CREATE TABLE IF NOT EXISTS $tableProducts (
             id INTEGER PRIMARY KEY,
             title TEXT,
             price INTEGER,
@@ -43,7 +45,7 @@ class DatabaseHelper {
           )
         ''');
         await db.execute('''
-          CREATE TABLE $tableProductCarts (
+          CREATE TABLE IF NOT EXISTS $tableProductCarts (
             id TEXT PRIMARY KEY,
             productId INTEGER,
             sizeIndex INTEGER,
@@ -59,6 +61,7 @@ class DatabaseHelper {
         title TEXT,
         subtitle TEXT,
         image TEXT,
+        userId INTEGER,
         createDate TEXT
       )
     ''');
@@ -114,7 +117,7 @@ class DatabaseHelper {
 
           // Có thể return ở đây nếu bạn không muốn thêm một bản ghi mới.
           return;
-        } else {}
+        } 
       }
     }
     productCart.id =
@@ -246,9 +249,10 @@ class DatabaseHelper {
   }
 
   // Hàm lấy danh sách tất cả thông báo từ cơ sở dữ liệu
-Future<List<NotiModel>> getAllNotifications() async {
+Future<List<NotiModel>> getAllNotifications(int userId) async {
   final db = await instance.database;
-  final List<Map<String, dynamic>> maps = await db.query(tableNotifications);
+  final List<Map<String, dynamic>> maps = await db.query(tableNotifications,where: 'userId = ?',
+      whereArgs: [userId],);
   
   return List.generate(maps.length, (i) {
     return NotiModel.fromMap(maps[i]);
@@ -277,5 +281,11 @@ Future<List<NotiModel>> getAllNotifications() async {
     );
   }
 
+  Future<void> getQuantityCart() async {
+    final dbHelper = DatabaseHelper.instance;
+    List<ProductCart> productCarts =
+        await dbHelper.getProductCarts(GlobalData.instance.userId);
 
+    GlobalData.instance.quantityCart = productCarts.length;
+  }
 }

@@ -11,11 +11,4 @@ class DetailCategory {
     this.products = const [],
   });
 
-  factory DetailCategory.fromJson(Map<String, dynamic> json) {
-    return DetailCategory();
-  }
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-      };
 }
