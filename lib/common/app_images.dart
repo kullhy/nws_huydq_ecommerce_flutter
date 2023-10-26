@@ -5,4 +5,6 @@ class AppImages {
   static const noCart = "assets/images/no_cart.png";
 
   static const noImage = "assets/images/error_network_image.jpg";
+
+  static const pageNotFound = "assets/images/page_not_found.png";
 }

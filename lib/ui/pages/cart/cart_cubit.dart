@@ -20,10 +20,12 @@ class CartCubit extends Cubit<CartState> {
   int totalPrice = 0;
 
   void getListCart() async {
+    totalPrice = 0;
+
     emit(state.copyWith(loadStatus: LoadStatus.initial));
     productCarts = await dbHelper.getProductCarts(GlobalData.instance.userId);
     for (var productCart in productCarts) {
-      await productCart.getProductDetails(dbHelper);
+      productCart.product = await dbHelper.getProductById(productCart.productId);
       totalPrice = totalPrice + productCart.totalPrice;
     }
     emit(state.copyWith(
@@ -36,7 +38,7 @@ class CartCubit extends Cubit<CartState> {
     emit(state.copyWith(loadStatus: LoadStatus.loadingMore));
     for (int i = 0; i < productCarts.length; i++) {
       if (productCarts[i].id == productCartId) {
-        productCarts[i].quantity = productCarts[i].quantity + 1;
+        productCarts[i].quantity += 1;
         totalPrice = totalPrice + productCarts[i].product!.price;
         productCarts[i].totalPrice =
             productCarts[i].quantity * productCarts[i].product!.price;
@@ -52,7 +54,7 @@ class CartCubit extends Cubit<CartState> {
     for (int i = 0; i < productCarts.length; i++) {
       if (productCarts[i].id == productCartId) {
         if (productCarts[i].quantity > 0) {
-          productCarts[i].quantity = productCarts[i].quantity - 1;
+          productCarts[i].quantity -= 1;
           totalPrice = totalPrice - productCarts[i].product!.price;
           productCarts[i].totalPrice =
               productCarts[i].quantity * productCarts[i].product!.price;
@@ -79,6 +81,10 @@ class CartCubit extends Cubit<CartState> {
     }
   }
 
-    void doNothing(BuildContext context) {}
+  void deleteProductCart(String cartId) {
+    dbHelper.deleteProductCart(cartId);
+    getListCart();
+  }
 
+  void doNothing(BuildContext context) {}
 }

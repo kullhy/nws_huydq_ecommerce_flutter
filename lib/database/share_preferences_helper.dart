@@ -1,3 +1,4 @@
+import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,6 +10,8 @@ class SharedPreferencesHelper {
   static const _cartIdKey = "cartIdKey";
 
   static const _didOnboardKey = 'onBoardingFlag';
+
+  static const _isNoti = 'isNoti';
 
   //Get onboard
   static Future<bool> isOnboardCompleted() async {
@@ -24,6 +27,23 @@ class SharedPreferencesHelper {
   static Future<void> setOnboard({onBoard = true}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_didOnboardKey, onBoard ?? true);
+  }
+
+  //Get onboard
+  static Future<void> getIsNoti() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      GlobalData.instance.isNoti = prefs.getBool(_isNoti) ?? false;
+    } catch (e) {
+      GlobalData.instance.isNoti = true;
+    }
+  }
+
+  //Set onboard
+  static Future<void> setIsNoti(bool isNoti) async {
+    GlobalData.instance.isNoti = isNoti;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_isNoti, GlobalData.instance.isNoti);
   }
 
   //Get authKey

@@ -57,7 +57,7 @@ class _CartViewState extends State<CartView> {
               return WillPopScope(
                 onWillPop: () async {
                   Navigator.pop(context);
-                  return false;
+                  return true;
                 },
                 child: Column(
                   children: [
@@ -72,7 +72,9 @@ class _CartViewState extends State<CartView> {
                             padding: const EdgeInsets.symmetric(horizontal: 24),
                             child: InkWell(
                               onTap: () {
-                                Navigator.canPop(context)?Navigator.pop(context):_cartCubit.navigator.openMainPage();
+                                Navigator.canPop(context)
+                                    ? Navigator.pop(context)
+                                    : _cartCubit.navigator.openMainPage();
                               },
                               child: SvgPicture.asset(
                                 AppSVGs.icBack,

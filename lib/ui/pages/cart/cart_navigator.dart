@@ -12,11 +12,16 @@ class CartNavigator extends AppNavigator {
   CartNavigator({required BuildContext context}) : super(context: context);
 
   Future<bool> openDetailProduct(ProductCart productCart) async {
-    Product product = productCart.product!;
-    bool result = await GoRouter.of(context).pushNamed(AppRouter.product,
-        extra: {'product': product, 'productCart': productCart}) as bool;
-    log(result.toString());
-    return result;
+    if (productCart.product != null) {
+      Product product = productCart.product!;
+      bool result = await GoRouter.of(context).pushNamed(AppRouter.product,
+          extra: {'product': product, 'productCart': productCart}) as bool;
+      log(result.toString());
+      return result;
+    } else {
+      GoRouter.of(context).push(AppRouter.error);
+      return false;
+    }
   }
 
   void openMainPage() {

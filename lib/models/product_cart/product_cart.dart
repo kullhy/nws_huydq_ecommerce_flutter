@@ -1,6 +1,4 @@
-import 'package:nws_huydq_ecommerce_flutter/database/sqlite.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
-import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
 
 class ProductCart {
   String id = "0";
@@ -42,12 +40,5 @@ class ProductCart {
     };
   }
 
-  Future<void> getProductDetails(DatabaseHelper dbHelper) async {
-    if (productId != 0) {
-      // Sử dụng database helper để lấy sản phẩm từ productId
-      final product = await dbHelper.getProductById(productId);
-      this.product = product;
-      logger.d(product!.title);
-    }
-  }
+  
 }

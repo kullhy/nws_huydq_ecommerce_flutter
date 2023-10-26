@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/categories/category.dart';
+import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/detail_category.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_path.dart';
@@ -15,7 +16,6 @@ import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_cubit
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/home/home_navigator.dart';
 import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
 
-import '../../../models/detail_categories/detail_category.dart';
 
 part 'home_state.dart';
 

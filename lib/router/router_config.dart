@@ -5,6 +5,7 @@ import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dar
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_categories/detail_category_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_page.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/error/error_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/login/login_page.dart';
 
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/main/main_page.dart';
@@ -12,8 +13,9 @@ import 'package:nws_huydq_ecommerce_flutter/ui/pages/notification/noti_page.dart
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/on_boarding/on_boarding_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/sign_up/sign_up_page.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/sign_up/successful_page.dart';
-import '../ui/pages/splash/splash_page.dart';
+
 import 'package:go_router/go_router.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/splash/splash_page.dart';
 
 class AppRouter {
   AppRouter._();
@@ -35,6 +37,7 @@ class AppRouter {
   static const String product = "product";
   static const String cart = "cart";
   static const String noti = "noti";
+  static const String error = "error";
 
   // GoRouter configuration
   static final _routes = <RouteBase>[
@@ -113,6 +116,11 @@ class AppRouter {
       path: "/$noti",
       builder: (context, state) => const NotiPage(),
     ),
+    GoRoute(
+      name: error,
+      path: "/$error",
+      builder: (context, state) => const ErrorPage(),
+    ),
   ];
 }
 
@@ -122,14 +130,14 @@ CustomTransitionPage buildPageWithDefaultTransition<T>({
   required Widget child,
 }) {
   return CustomTransitionPage<T>(
-      transitionDuration: const Duration(seconds: 1),
-      key: state.pageKey,
-      child: child,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
-          child: child,
-        );
-      },
+    transitionDuration: const Duration(seconds: 1),
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(
+        opacity: CurveTween(curve: Curves.easeInCirc).animate(animation),
+        child: child,
       );
+    },
+  );
 }

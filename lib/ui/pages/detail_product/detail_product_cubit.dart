@@ -15,7 +15,6 @@ import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dar
 import 'package:nws_huydq_ecommerce_flutter/service/firebase_api.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_navigator.dart';
 
-
 part 'detail_product_state.dart';
 
 class DetailProductCubit extends Cubit<DetailProductState> {
@@ -49,6 +48,7 @@ class DetailProductCubit extends Cubit<DetailProductState> {
   }
 
   Future<void> addCart(BuildContext context) async {
+    emit(state.copyWith(loadStatus: LoadStatus.loading));
     productCart.id = "${product.id}1";
     await dbHelper.insertProduct(product);
     await dbHelper.insertProductCart(productCart);
@@ -58,17 +58,17 @@ class DetailProductCubit extends Cubit<DetailProductState> {
     // ignore: use_build_context_synchronously
     context.read<AppCubit>().getQuantityCart();
     emit(state.copyWith(loadStatus: LoadStatus.loadingMore));
-    emit(state.copyWith(loadStatus: LoadStatus.success));
-    notiRef.set(true);
+    notiRef.set(GlobalData.instance.fCMToken);
     addToCartPopUpAnimationController.forward();
-
+    emit(state.copyWith(loadStatus: LoadStatus.success));
     Timer(const Duration(seconds: 5), () {
       addToCartPopUpAnimationController.reverse();
-      notiRef.set(false);
+      notiRef.set("null");
     });
-
+    
     NotiModel notiModel = NotiModel(
-      id: product.id,
+      id: DateTime.now().microsecondsSinceEpoch,
+      userId: GlobalData.instance.userId,
       createDate: DateTime.now(),
       image: product.images[0],
       title: product.title,
@@ -77,7 +77,6 @@ class DetailProductCubit extends Cubit<DetailProductState> {
 
     dbHelper.insertNotification(notiModel);
   }
-
 
   void setProductCart() {
     productCart.productId = product.id;
@@ -101,7 +100,7 @@ class DetailProductCubit extends Cubit<DetailProductState> {
   }
 
   void addQuantity() {
-    quantity = quantity + 1;
+    quantity +=1;
     productCart.quantity = quantity;
     productCart.totalPrice = quantity * product.price;
     emit(state.copyWith(quantity: quantity));
@@ -109,7 +108,7 @@ class DetailProductCubit extends Cubit<DetailProductState> {
 
   void subtractQuantity() {
     if (quantity != 0) {
-      quantity = quantity - 1;
+      quantity-=1;
       productCart.quantity = quantity;
       productCart.totalPrice = quantity * product.price;
       emit(state.copyWith(quantity: quantity));

@@ -31,4 +31,7 @@ class AppColors {
 
   //profile
   static const Color iconBackground = Color.fromARGB(198, 223, 223, 223);
+
+  //Cart
+  static const deleteBackground = Color(0xFFFE4A49);
 }

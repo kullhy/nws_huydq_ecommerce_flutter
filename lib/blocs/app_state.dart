@@ -15,12 +15,6 @@ class AppState extends Equatable {
     );
   }
 
-  AppState removeUser() {
-    return AppState(
-      fetchProfileStatus: fetchProfileStatus,
-    );
-  }
-
   @override
   List<Object?> get props => [
         fetchProfileStatus,
