@@ -47,6 +47,16 @@ class DetailProductCubit extends Cubit<DetailProductState> {
     }
   }
 
+  void sendNoti() {
+    log(GlobalData.instance.isNoti.toString());
+    if (GlobalData.instance.isNoti) {
+      notiRef.set(GlobalData.instance.fCMToken);
+      Timer(const Duration(seconds: 5), () {
+        notiRef.set("null");
+      });
+    }
+  }
+
   Future<void> addCart(BuildContext context) async {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
     productCart.id = "${product.id}1";
@@ -54,18 +64,16 @@ class DetailProductCubit extends Cubit<DetailProductState> {
     await dbHelper.insertProductCart(productCart);
     isCart = true;
     log(FireBaseApi.fCMToken);
-    tokenRef.set(FireBaseApi.fCMToken);
+    sendNoti();
     // ignore: use_build_context_synchronously
     context.read<AppCubit>().getQuantityCart();
     emit(state.copyWith(loadStatus: LoadStatus.loadingMore));
-    notiRef.set(GlobalData.instance.fCMToken);
     addToCartPopUpAnimationController.forward();
     emit(state.copyWith(loadStatus: LoadStatus.success));
     Timer(const Duration(seconds: 5), () {
       addToCartPopUpAnimationController.reverse();
-      notiRef.set("null");
     });
-    
+
     NotiModel notiModel = NotiModel(
       id: DateTime.now().microsecondsSinceEpoch,
       userId: GlobalData.instance.userId,
@@ -100,7 +108,7 @@ class DetailProductCubit extends Cubit<DetailProductState> {
   }
 
   void addQuantity() {
-    quantity +=1;
+    quantity += 1;
     productCart.quantity = quantity;
     productCart.totalPrice = quantity * product.price;
     emit(state.copyWith(quantity: quantity));
@@ -108,7 +116,7 @@ class DetailProductCubit extends Cubit<DetailProductState> {
 
   void subtractQuantity() {
     if (quantity != 0) {
-      quantity-=1;
+      quantity -= 1;
       productCart.quantity = quantity;
       productCart.totalPrice = quantity * product.price;
       emit(state.copyWith(quantity: quantity));

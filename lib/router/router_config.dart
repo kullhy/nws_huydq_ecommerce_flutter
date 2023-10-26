@@ -119,7 +119,7 @@ class AppRouter {
     GoRoute(
       name: error,
       path: "/$error",
-      builder: (context, state) => const ErrorPage(),
+      builder: (context, state){return const ErrorPage();}
     ),
   ];
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
@@ -53,11 +54,11 @@ class _SignUpViewState extends State<SignUpView> {
                     child: Image.asset("assets/images/logo.png"),
                   ),
                   Text(
-                    "Sign Up",
+                    'sign_up'.tr,
                     style: AppTextStyle.blackS18Bold,
                   ),
                   Text(
-                    "Create an new account",
+                    "create_new_account".tr,
                     style: AppTextStyle.greyS14,
                     overflow: TextOverflow.clip,
                   ),
@@ -70,7 +71,7 @@ class _SignUpViewState extends State<SignUpView> {
                       controller: _signUpCubit.userNameController,
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.zero,
-                          labelText: 'User Name',
+                          labelText: 'user_name'.tr,
                           labelStyle: AppTextStyle.blackS20Bold,
                           suffixIcon: state.isUserName
                               ? const Icon(
@@ -108,7 +109,7 @@ class _SignUpViewState extends State<SignUpView> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      labelText: 'Password',
+                      labelText: 'password'.tr,
                       labelStyle: AppTextStyle.blackS20Bold,
                       suffixIcon: InkWell(
                         onTap: _signUpCubit.showPassWord,
@@ -133,7 +134,7 @@ class _SignUpViewState extends State<SignUpView> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      labelText: 'Confirm Password',
+                      labelText: 'confirm_password'.tr,
                       labelStyle: AppTextStyle.blackS20Bold,
                       suffixIcon: InkWell(
                         onTap: _signUpCubit.showConfirmPassWord,
@@ -163,7 +164,7 @@ class _SignUpViewState extends State<SignUpView> {
                         child: Padding(
                           padding: const EdgeInsets.only(top: 10),
                           child: Text(
-                            "By creating an account you have to agree with our them & condication",
+                            'policy'.tr,
                             style: AppTextStyle.tintS14,
                             overflow: TextOverflow.clip,
                           ),
@@ -196,7 +197,7 @@ class _SignUpViewState extends State<SignUpView> {
                         child: state.loadStatus == LoadStatus.loading
                             ? const Center(child: CircularProgressIndicator())
                             : Text(
-                                "Login",
+                                'sign_up'.tr,
                                 style: AppTextStyle.whiteS16Bold,
                               ),
                       ),

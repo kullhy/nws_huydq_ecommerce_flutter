@@ -5,8 +5,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:get/get.dart' hide Response;
 import 'package:image_picker/image_picker.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/secure_storage_helper.dart';
+import 'package:nws_huydq_ecommerce_flutter/database/share_preferences_helper.dart';
 import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/profile/profile.dart';
@@ -31,6 +33,8 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   BuildContext? context;
 
+  String language = "";
+
   final Reference storageReference =
       FirebaseStorage.instance.ref().child('images');
 
@@ -47,7 +51,7 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void logOut(BuildContext context) {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
-    showCustomDialog(
+    showAlertDialog(
       context: context,
       title: "Log Out",
       content: "Are you sure you want to log out",
@@ -58,6 +62,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           () {
             emit(state.copyWith(loadStatus: LoadStatus.success));
             navigator.openLogin();
+            
             GlobalData.instance.quantityCart = 0;
             GlobalData.instance.userId = 0;
           },
@@ -109,5 +114,35 @@ class ProfileCubit extends Cubit<ProfileState> {
     } else {}
     // ignore: use_build_context_synchronously
     context!.read<MainCubit>().getProfile(context!);
+  }
+
+  void changLanguage(String? lang) {
+    if (lang == "Vietnamese" || lang == "Tiếng Việt") {
+      var locale = const Locale('vi');
+      Get.updateLocale(locale);
+      language = "Vietnamese";
+      SharedPreferencesHelper.setLanguage('vi');
+    } else {
+      var locale = const Locale('en');
+      Get.updateLocale(locale);
+      language = "English";
+      SharedPreferencesHelper.setLanguage('en');
+    }
+    log(language);
+    emit(state.copyWith(language: language));
+  }
+
+  void getLanguage() {
+    if (GlobalData.instance.language == "vi") {
+      language = "Vietnamese";
+    } else {
+      language = "English";
+    }
+    emit(state.copyWith(language: language));
+  }
+
+  void changeNotiState(bool isNoti) {
+    SharedPreferencesHelper.setIsNoti(isNoti);
+    emit(state.copyWith(isNoti: isNoti));
   }
 }
