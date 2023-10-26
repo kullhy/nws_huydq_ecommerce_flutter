@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_shadow.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
@@ -68,7 +69,7 @@ class ProductInfoWidget extends StatelessWidget {
                           width: 4,
                         ),
                         Text(
-                          "(320 Review)",
+                          "(320 ${'review'.tr})",
                           style: AppTextStyle.blackS12Bold,
                         ),
                       ],
@@ -77,7 +78,7 @@ class ProductInfoWidget extends StatelessWidget {
                       height: 24,
                     ),
                     Text(
-                      "Size",
+                      'size'.tr,
                       style: AppTextStyle.blackS16W800,
                     ),
                     const SizedBox(
@@ -117,7 +118,7 @@ class ProductInfoWidget extends StatelessWidget {
                       height: 24,
                     ),
                     Text(
-                      "Description",
+                      "description".tr,
                       style: AppTextStyle.blackS16W800,
                     ),
                     const SizedBox(
@@ -138,7 +139,7 @@ class ProductInfoWidget extends StatelessWidget {
                             SizedBox(
                               height: 10,
                               child: Text(
-                                "Total Price",
+                                'total_price'.tr,
                                 style: AppTextStyle.tintS9,
                               ),
                             ),
@@ -176,7 +177,7 @@ class ProductInfoWidget extends StatelessWidget {
                                         width: 16,
                                       ),
                                       Text(
-                                        "Add to cart",
+                                        'add_to_cart'.tr,
                                         style: AppTextStyle.whiteS16Bold,
                                       ),
                                       const Spacer(),
@@ -235,7 +236,7 @@ class ProductInfoWidget extends StatelessWidget {
               top: 68,
               right: 24,
               child: Text(
-                "Avaliable in stok",
+                'avaliable_in_stok'.tr,
                 style: AppTextStyle.blackS12Bold,
               ),
             ),

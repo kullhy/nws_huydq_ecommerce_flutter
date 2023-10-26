@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/login/login_cubit.dart';
@@ -56,11 +57,11 @@ class _LoginViewState extends State<LoginView> {
                     child: Image.asset("assets/images/logo.png"),
                   ),
                   Text(
-                    "Wealcome!",
+                    'welcome'.tr,
                     style: AppTextStyle.blackS18Bold,
                   ),
                   Text(
-                    "please login or sign up to continue our app",
+                    'subtitle'.tr,
                     style: AppTextStyle.greyS14,
                     overflow: TextOverflow.clip,
                   ),
@@ -92,7 +93,7 @@ class _LoginViewState extends State<LoginView> {
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.zero,
-                      labelText: 'Password',
+                      labelText: 'password'.tr,
                       labelStyle: AppTextStyle.blackS20Bold,
                       suffixIcon: InkWell(
                         onTap: _loginCubit.showPassWord,
@@ -131,7 +132,7 @@ class _LoginViewState extends State<LoginView> {
                         child: state.loadStatus == LoadStatus.loading
                             ? const Center(child: CircularProgressIndicator())
                             : Text(
-                                "Login",
+                                "login".tr,
                                 style: AppTextStyle.whiteS16Bold,
                               ),
                       ),
@@ -144,7 +145,7 @@ class _LoginViewState extends State<LoginView> {
                     onTap: _loginCubit.openSignUp,
                     child: Center(
                       child: Text(
-                        "Crate new account?",
+                        "${'create_new_account'.tr}?",
                         style: AppTextStyle.blueS16Bold,
                       ),
                     ),

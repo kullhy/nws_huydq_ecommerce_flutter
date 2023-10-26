@@ -32,6 +32,7 @@ class CartItemWidget extends StatelessWidget {
           child: Slidable(
             key: const ValueKey(0),
             endActionPane: ActionPane(
+              extentRatio: 0.2,
               motion: const ScrollMotion(),
               dismissible: null,
               children: [
@@ -46,14 +47,12 @@ class CartItemWidget extends StatelessWidget {
                         context: context,
                         onConfirm: () {
                           cartCubit.deleteProductCart(productCart.id);
-                          GoRouter.of(context).pop();
                         },
                         title: 'DELETE CART');
                   },
-                  backgroundColor: AppColors.deleteBackground,
+                  backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
                   icon: Icons.delete,
-                  label: 'Delete',
                 ),
               ],
             ),

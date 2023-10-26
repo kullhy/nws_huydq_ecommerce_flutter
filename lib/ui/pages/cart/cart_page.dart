@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
@@ -89,7 +90,7 @@ class _CartViewState extends State<CartView> {
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 24),
                             child: Text(
-                              "My Cart",
+                              "my_cart".tr,
                               style: AppTextStyle.blackS18Bold,
                             ),
                           ),
@@ -136,7 +137,7 @@ class _CartViewState extends State<CartView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "Total (${state.productCarts.length} item):",
+                            "${'total'.tr} (${state.productCarts.length} ${'item'.tr}):",
                             style: AppTextStyle.tintS14Bold,
                           ),
                           Text(
@@ -161,7 +162,7 @@ class _CartViewState extends State<CartView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text("Proceed to Checkout",
+                          Text('proceed_to_checkout'.tr,
                               style: AppTextStyle.whiteS16Bold),
                           SvgPicture.asset(
                             AppSVGs.icCheckout,

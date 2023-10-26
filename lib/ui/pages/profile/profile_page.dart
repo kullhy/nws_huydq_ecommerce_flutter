@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
@@ -42,6 +43,7 @@ class _ProfileViewState extends State<ProfileView> {
 
     _profileCubit = context.read<ProfileCubit>();
     _profileCubit.getProfile(context);
+    _profileCubit.getLanguage();
     _profileCubit.context = context;
   }
 
@@ -77,7 +79,7 @@ class _ProfileViewState extends State<ProfileView> {
                           TextButton(
                             onPressed: _profileCubit.getImage,
                             child: Text(
-                              "Upload image",
+                              'upload_image'.tr,
                               style: AppTextStyle.blackS14W800,
                             ),
                           ),
@@ -86,7 +88,7 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                           InfoField(
                             size: size,
-                            name: "Name",
+                            name: 'name'.tr,
                             textEditingController:
                                 _profileCubit.nameEditingController,
                           ),
@@ -99,7 +101,7 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                           InfoField(
                             size: size,
-                            name: "Age",
+                            name: 'age'.tr,
                             textEditingController:
                                 _profileCubit.ageEditingController,
                           ),
@@ -124,14 +126,18 @@ class _ProfileViewState extends State<ProfileView> {
                           Align(
                             alignment: Alignment.bottomLeft,
                             child: Text(
-                              "Settings",
+                              'settings'.tr,
                               style: AppTextStyle.blackS18W800,
                             ),
                           ),
                           const SizedBox(
                             height: 16,
                           ),
-                          const SettingWidget(),
+                          SettingWidget(
+                            changeNoti: _profileCubit.changeNotiState,
+                            changeLang: _profileCubit.changLanguage,
+                            language: state.language,
+                          ),
                           const SizedBox(
                             height: 20,
                           ),
@@ -157,7 +163,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     width: 20,
                                   ),
                                   Text(
-                                    "Log Out",
+                                    'log_out'.tr,
                                     style: AppTextStyle.whiteS14w500,
                                   )
                                 ],
@@ -177,5 +183,3 @@ class _ProfileViewState extends State<ProfileView> {
     );
   }
 }
-
-

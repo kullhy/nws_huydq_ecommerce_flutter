@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_shadow.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
@@ -83,7 +84,7 @@ class _NotiViewState extends State<NotiView> {
                   height: 20,
                 ),
                 Text(
-                  "Notificaion",
+                  "notification".tr,
                   style: AppTextStyle.blackS18W800,
                 ),
                 const SizedBox(

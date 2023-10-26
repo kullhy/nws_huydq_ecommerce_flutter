@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
+import 'package:nws_huydq_ecommerce_flutter/database/share_preferences_helper.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/splash/splash_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/splash/splash_navigator.dart';
 
@@ -33,6 +34,10 @@ class _SplashViewState extends State<SplashView> {
     super.initState();
     _splashCubit = context.read<SplashCubit>();
     _splashCubit.checkLogin(context);
+  SharedPreferencesHelper.getIsNoti();
+  SharedPreferencesHelper.getLanguage();
+
+
   }
 
   @override

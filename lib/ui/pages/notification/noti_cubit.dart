@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:nws_huydq_ecommerce_flutter/database/sqlite.dart';
 import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
@@ -19,6 +20,7 @@ class NotiCubit extends Cubit<NotiState> {
     emit(state.copyWith(loadStatus: LoadStatus.loading));
     notifications =
         await dbHelper.getAllNotifications(GlobalData.instance.userId);
+    notifications = notifications.reversed.toList();
     emit(state.copyWith(
         loadStatus: LoadStatus.success, notifications: notifications));
   }
@@ -31,11 +33,11 @@ class NotiCubit extends Cubit<NotiState> {
       final format = DateFormat.yMMMd();
       return format.format(time);
     } else if (difference.inHours >= 1) {
-      return '${difference.inHours} hours ago';
+      return '${difference.inHours} ${'hour_ago'.tr}';
     } else if (difference.inMinutes >= 1) {
-      return '${difference.inMinutes} minutes ago';
+      return '${difference.inMinutes} ${'minutes_ago'.tr}';
     } else {
-      return 'just now';
+      return 'just_now'.tr;
     }
   }
 }

@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/utils/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,6 +14,9 @@ class SharedPreferencesHelper {
   static const _didOnboardKey = 'onBoardingFlag';
 
   static const _isNoti = 'isNoti';
+
+  static const _language = 'language';
+
 
   //Get onboard
   static Future<bool> isOnboardCompleted() async {
@@ -29,7 +34,7 @@ class SharedPreferencesHelper {
     await prefs.setBool(_didOnboardKey, onBoard ?? true);
   }
 
-  //Get onboard
+  //Get Noti
   static Future<void> getIsNoti() async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -39,11 +44,31 @@ class SharedPreferencesHelper {
     }
   }
 
-  //Set onboard
+  //Set Noti
   static Future<void> setIsNoti(bool isNoti) async {
     GlobalData.instance.isNoti = isNoti;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(_isNoti, GlobalData.instance.isNoti);
+  }
+
+  static Future<void> getLanguage() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      GlobalData.instance.language = prefs.getString(_language) ?? "en";
+      var locale = Locale(GlobalData.instance.language);
+      Get.updateLocale(locale);
+    } catch (e) {
+      GlobalData.instance.language = "en";
+      var locale = Locale(GlobalData.instance.language);
+      Get.updateLocale(locale);
+    }
+  }
+
+  //Set onboard
+  static Future<void> setLanguage(String language) async {
+    GlobalData.instance.language = language;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString(_language, GlobalData.instance.language);
   }
 
   //Get authKey

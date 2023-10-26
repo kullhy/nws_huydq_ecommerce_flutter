@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/profile_cubit.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/widgets/switch/switch_custom.dart';
 
-class SettingWidget extends StatefulWidget {
+class SettingWidget extends StatelessWidget {
   const SettingWidget({
     super.key,
+    required this.changeNoti,
+    required this.changeLang,
+    required this.language,
   });
 
-  @override
-  State<SettingWidget> createState() => _SettingWidgetState();
-}
+  final Function(bool) changeNoti;
+  final Function(String?) changeLang;
+  final String language;
 
-class _SettingWidgetState extends State<SettingWidget> {
-  bool _enable = false;
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 226,
+      height: 240,
       padding: const EdgeInsets.fromLTRB(20, 28, 10, 28),
       width: double.infinity,
       decoration: BoxDecoration(
@@ -36,50 +40,59 @@ class _SettingWidgetState extends State<SettingWidget> {
               width: 12,
             ),
             Text(
-              "Language",
+              'language'.tr,
               style: AppTextStyle.blackS14W800,
             ),
             const Spacer(),
-            Text(
-              "English",
-              style: AppTextStyle.tintS10,
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            const Icon(
-              Icons.navigate_next_outlined,
-              size: 20,
-            )
+            DropdownButton<String>(
+                value: language,
+                icon: const Icon(Icons.navigate_next_rounded),
+                elevation: 0,
+                underline: null,
+                onChanged: changeLang,
+                items: [
+                  DropdownMenuItem(
+                    value: 'English',
+                    child: Text(
+                      'english'.tr,
+                      style: AppTextStyle.tintS10,
+                    ),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Vietnamese',
+                    child: Text(
+                      'vietnamese'.tr,
+                      style: AppTextStyle.tintS10,
+                    ),
+                  ),
+                ])
           ],
         ),
         const SizedBox(
           height: 8,
         ),
-        Row(
-          children: [
-            icon(AppSVGs.icNoti),
-            const SizedBox(
-              width: 12,
-            ),
-            Text(
-              "Notification",
-              style: AppTextStyle.blackS14W800,
-            ),
-            const Spacer(),
-            SizedBox(
-              height: 20,
-              child: CustomSwitch(
-                value: _enable,
-                onChanged: (bool val) {
-                  setState(() {
-                    _enable = val;
-                  });
-                },
+        BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
+          return Row(
+            children: [
+              icon(AppSVGs.icNoti),
+              const SizedBox(
+                width: 12,
               ),
-            )
-          ],
-        ),
+              Text(
+                'notification'.tr,
+                style: AppTextStyle.blackS14W800,
+              ),
+              const Spacer(),
+              SizedBox(
+                height: 20,
+                child: CustomSwitch(
+                  value: state.isNoti,
+                  onChanged: changeNoti,
+                ),
+              )
+            ],
+          );
+        }),
         const SizedBox(
           height: 8,
         ),
@@ -90,7 +103,7 @@ class _SettingWidgetState extends State<SettingWidget> {
               width: 12,
             ),
             Text(
-              "Dark Mode",
+              'dark_mode'.tr,
               style: AppTextStyle.blackS14W800,
             ),
             const Spacer(),
@@ -104,12 +117,8 @@ class _SettingWidgetState extends State<SettingWidget> {
             SizedBox(
               height: 20,
               child: CustomSwitch(
-                value: _enable,
-                onChanged: (bool val) {
-                  setState(() {
-                    _enable = val;
-                  });
-                },
+                value: true,
+                onChanged: (bool val) {},
               ),
             )
           ],
@@ -124,7 +133,7 @@ class _SettingWidgetState extends State<SettingWidget> {
               width: 12,
             ),
             Text(
-              "Help Center",
+              "help_center".tr,
               style: AppTextStyle.blackS14W800,
             ),
             const Spacer(),
@@ -161,3 +170,5 @@ class _SettingWidgetState extends State<SettingWidget> {
     );
   }
 }
+
+List<String> list = <String>['english'.tr, 'vietnamese'.tr];

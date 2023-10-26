@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
@@ -66,7 +67,7 @@ class CategoriesItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "$quantity product",
+                    "$quantity ${'product'.tr}",
                     style: AppTextStyle.blackS12Bold,
                   )
                 ],

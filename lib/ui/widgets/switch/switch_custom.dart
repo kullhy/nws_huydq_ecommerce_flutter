@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 
 class CustomSwitch extends StatefulWidget {
   final bool value;
@@ -51,7 +52,7 @@ class _CustomSwitchState extends State<CustomSwitch>
               borderRadius: BorderRadius.circular(20.0),
               color: _circleAnimation!.value == Alignment.centerLeft
                   ? Colors.black
-                  : Colors.blue,
+                  : AppColors.iconBackground,
             ),
             child: Padding(
               padding: const EdgeInsets.all(4),
@@ -69,7 +70,7 @@ class _CustomSwitchState extends State<CustomSwitch>
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       color: _circleAnimation!.value == Alignment.centerLeft
-                          ? Colors.white
+                          ? AppColors.iconBackground
                           : Colors.black),
                 ),
               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 
 class GenderWidget extends StatelessWidget {
@@ -12,7 +13,7 @@ class GenderWidget extends StatelessWidget {
       children: [
         Expanded(
           child: Text(
-            "Gender",
+            'gender'.tr,
             style: AppTextStyle.tintS14Bold,
           ),
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/blocs/app_cubit.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_languages.dart';
 import 'package:nws_huydq_ecommerce_flutter/router/router_config.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/check_home/check_home_cubit.dart';
 
@@ -19,14 +21,20 @@ class MyApp extends StatelessWidget {
           return CheckHomeCubit();
         }),
       ],
-      child: MaterialApp.router(
+      child: GetMaterialApp(
+        theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          useMaterial3: true,
+        translations: LocalString(),
+        locale: const Locale('en'),
+        home: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            useMaterial3: true,
+          ),
+          routerConfig: AppRouter.router,
         ),
-        routerConfig: AppRouter.router,
       ),
     );
   }
