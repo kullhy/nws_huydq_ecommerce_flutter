@@ -89,7 +89,6 @@ class _HomeViewState extends State<HomeView> {
                         },
                         textEditingController:
                             _homeCubit.searchEditingController,
-                        
                         hintText: 'search_categoty'.tr,
                       ),
                       const SizedBox(
@@ -109,6 +108,7 @@ class _HomeViewState extends State<HomeView> {
                                   children: List.generate(
                                     state.categories.length,
                                     (index) {
+                                  
                                       return CategoriesItem(
                                         ontap: () {
                                           _homeCubit.openDetailCategory(

@@ -39,6 +39,7 @@ class ProfileCubit extends Cubit<ProfileState> {
       FirebaseStorage.instance.ref().child('images');
 
   Future<void> getProfile(BuildContext context) async {
+    emit(state.copyWith(loadStatus: LoadStatus.loading));
     Profile profile = context.read<MainCubit>().profile;
     log(profile.avatar);
     nameEditingController.text = profile.name;
@@ -46,7 +47,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     emailEditingController.text = profile.email;
     imageUrl = profile.avatar;
 
-    emit(state.copyWith(loadStatus: LoadStatus.success, imageUrl: imageUrl));
+    emit(state.copyWith(
+        loadStatus: LoadStatus.success,
+        imageUrl: imageUrl,
+        isNoti: GlobalData.instance.isNoti));
   }
 
   void logOut(BuildContext context) {
@@ -62,7 +66,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           () {
             emit(state.copyWith(loadStatus: LoadStatus.success));
             navigator.openLogin();
-            
+
             GlobalData.instance.quantityCart = 0;
             GlobalData.instance.userId = 0;
           },

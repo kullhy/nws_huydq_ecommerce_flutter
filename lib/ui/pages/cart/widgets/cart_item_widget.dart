@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:go_router/go_router.dart';
+import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
+
 import 'package:nws_huydq_ecommerce_flutter/common/app_shadow.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/commons/app_dialog.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/widgets/images/image_network.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/cart/cart_cubit.dart';
 
 class CartItemWidget extends StatelessWidget {
@@ -43,12 +44,12 @@ class CartItemWidget extends StatelessWidget {
                       bottomRight: Radius.circular(12)),
                   onPressed: (BuildContext context) {
                     showAlertDialog(
-                        content: "Are you sure you want to delete this cart",
+                        content: 'confirm_delete'.tr,
                         context: context,
                         onConfirm: () {
                           cartCubit.deleteProductCart(productCart.id);
                         },
-                        title: 'DELETE CART');
+                        title: 'delete_cart'.tr);
                   },
                   backgroundColor: Colors.black,
                   foregroundColor: Colors.white,
@@ -68,20 +69,11 @@ class CartItemWidget extends StatelessWidget {
               child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.network(
-                    productCart.product!.images[0],
+                  child: ImageNetwork(
+                    imgUrl: productCart.product!.images[0],
                     width: 84,
                     height: 84,
                     fit: BoxFit.cover,
-                    errorBuilder: (BuildContext context, Object exception,
-                        StackTrace? stackTrace) {
-                      return Image.asset(
-                        AppImages.noImage,
-                        width: size.width * 0.4,
-                        height: 150,
-                        fit: BoxFit.cover,
-                      );
-                    },
                   ),
                 ),
                 const SizedBox(
@@ -135,8 +127,8 @@ class CartItemWidget extends StatelessWidget {
                                   ),
                                   InkWell(
                                     onTap: () {
-                                      cartCubit
-                                          .subtractQuantity(productCart.id);
+                                      cartCubit.subtractQuantity(
+                                          productCart.id, context);
                                     },
                                     child: Text(
                                       "−",

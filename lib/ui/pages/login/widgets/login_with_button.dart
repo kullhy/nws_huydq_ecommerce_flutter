@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 
 class LoginWithButton extends StatelessWidget {
@@ -19,11 +20,10 @@ class LoginWithButton extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(
               color: content == "Facebook"
-                  ? const Color(0xff3b5999)
+                  ? AppColors.primary
                   : Colors.grey.withOpacity(0.3)),
           borderRadius: BorderRadius.circular(25),
-          color:
-              content == "Facebook" ? const Color(0xff3b5999) : Colors.white),
+          color: content == "Facebook" ? AppColors.primary : Colors.white),
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

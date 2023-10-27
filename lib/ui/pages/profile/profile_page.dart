@@ -57,7 +57,7 @@ class _ProfileViewState extends State<ProfileView> {
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: BlocBuilder<ProfileCubit, ProfileState>(
             builder: (context, state) {
-              return state.loadStatus == LoadStatus.initial
+              return state.loadStatus == LoadStatus.loading
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )

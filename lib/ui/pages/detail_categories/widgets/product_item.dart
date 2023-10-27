@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/widgets/images/image_network.dart';
+
 
 class ProductItem extends StatelessWidget {
   const ProductItem({
@@ -27,20 +28,12 @@ class ProductItem extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.network(
-                    product.images[0].toString(),
+                  child: ImageNetwork(
+                    imgUrl: product.images[0].toString(),
                     width: size.width * 0.4,
                     height: 150,
                     fit: BoxFit.cover,
-                    errorBuilder: (BuildContext context, Object exception,
-                        StackTrace? stackTrace) {
-                      return Image.asset(
-                        AppImages.noImage,
-                        width: size.width * 0.4,
-                        height: 150,
-                        fit: BoxFit.cover,
-                      );
-                    },
+                    
                   ),
                 ),
                 Positioned(

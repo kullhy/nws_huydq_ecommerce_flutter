@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
+
 import 'package:nws_huydq_ecommerce_flutter/common/app_shadow.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_vector.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/widgets/images/image_network.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/profile/profile_cubit.dart';
 
 class AvatarWidget extends StatelessWidget {
@@ -27,24 +28,11 @@ class AvatarWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(16)),
-            child: Image.network(
-              imageUrl,
+            child: ImageNetwork(
+              imgUrl: imageUrl,
               width: 80,
               height: 80,
               fit: BoxFit.cover,
-              errorBuilder: (BuildContext context, Object exception,
-                  StackTrace? stackTrace) {
-                return loadStatus == LoadStatus.loadingMore
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Image.asset(
-                        AppImages.noImage,
-                        width: 80,
-                        height: 80,
-                        fit: BoxFit.cover,
-                      );
-              },
             ),
           ),
           Positioned(

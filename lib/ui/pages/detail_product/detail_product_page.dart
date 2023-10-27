@@ -7,6 +7,7 @@ import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/detail_categories/product.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/product_cart/product_cart.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/widgets/images/image_network.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/widgets/add_to_cart_widget.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/widgets/product_info_widget.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/detail_product/detail_product_cubit.dart';
@@ -81,8 +82,8 @@ class _DetailProductViewState extends State<DetailProductView>
                     itemCount: state.product!.images.length,
                     onPageChanged: _detailProductCubit.onChangedPage,
                     itemBuilder: (context, index) {
-                      return Image.network(
-                        _detailProductCubit.product.images[index],
+                      return ImageNetwork(
+                        imgUrl: _detailProductCubit.product.images[index],
                         height: size.height * 0.55,
                         width: double.infinity,
                         fit: BoxFit.cover,

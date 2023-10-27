@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_colors.dart';
-import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
+
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
+import 'package:nws_huydq_ecommerce_flutter/ui/widgets/images/image_network.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/notification/noti_cubit.dart';
+import 'package:nws_huydq_ecommerce_flutter/utils/date_utils.dart';
 
 class NotiItem extends StatelessWidget {
   const NotiItem({
@@ -10,7 +12,8 @@ class NotiItem extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.image,
-    required this.time, required this.notiCubit,
+    required this.time,
+    required this.notiCubit,
   });
 
   final String title;
@@ -18,8 +21,6 @@ class NotiItem extends StatelessWidget {
   final String image;
   final DateTime time;
   final NotiCubit notiCubit;
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -33,20 +34,11 @@ class NotiItem extends StatelessWidget {
               backgroundColor: Colors.amber,
               backgroundImage: null,
               child: ClipOval(
-                child: Image.network(
-                  image,
+                child: ImageNetwork(
+                  imgUrl: image,
                   width: 84,
                   height: 84,
                   fit: BoxFit.cover,
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
-                    return Image.asset(
-                      AppImages.noImage,
-                      width: 84,
-                      height: 150,
-                      fit: BoxFit.cover,
-                    );
-                  },
                 ),
               ),
             ),
@@ -72,7 +64,7 @@ class NotiItem extends StatelessWidget {
                   height: 4,
                 ),
                 Text(
-                  notiCubit.formatTimeAgo(time),
+                  DateTimeUtils().formatTimeAgo(time),
                   style: AppTextStyle.tintS11,
                   maxLines: 3,
                   overflow: TextOverflow.clip,

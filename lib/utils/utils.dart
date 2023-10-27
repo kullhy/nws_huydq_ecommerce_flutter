@@ -97,7 +97,7 @@ class Utils {
   }
 
   static String? getHexFromColor(Color color) {
-    String colorString = color.toString(); // Color(0x12345678)
+    String colorString = color.toString(); 
     String valueString = colorString.split('(0x')[1].split(')')[0];
     return valueString;
   }

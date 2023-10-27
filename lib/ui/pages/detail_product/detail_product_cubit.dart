@@ -115,7 +115,7 @@ class DetailProductCubit extends Cubit<DetailProductState> {
   }
 
   void subtractQuantity() {
-    if (quantity != 0) {
+    if (quantity > 1) {
       quantity -= 1;
       productCart.quantity = quantity;
       productCart.totalPrice = quantity * product.price;

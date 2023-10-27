@@ -53,7 +53,7 @@ class _MainViewState extends State<MainView> {
                   ),
                   BottomBarItem(
                     iconItem: AppSVGs.icNoti,
-                    title: 'Noti',
+                    title: 'Notifi',
                   ),
                   BottomBarItem(
                     iconItem: AppSVGs.icProfile,

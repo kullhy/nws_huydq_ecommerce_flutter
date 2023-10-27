@@ -1,8 +1,10 @@
 import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import 'package:nws_huydq_ecommerce_flutter/database/share_preferences_helper.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/network/api_path.dart';
@@ -22,6 +24,8 @@ class LoginCubit extends Cubit<LoginState> {
 
   final storage = const FlutterSecureStorage();
   final emailKey = GlobalKey<FormState>();
+
+  String errorLoginMes = "";
 
   void saveOnboardingFlag() {
     SharedPreferencesHelper.setOnboard();
@@ -75,13 +79,19 @@ class LoginCubit extends Cubit<LoginState> {
 
         navigator.openMainPage();
       } else {
-        emit(state.copyWith(
-            loadStatus: LoadStatus.failure,
-            errorMessage: response.statusMessage));
+        if (response.statusCode == 401) {
+          errorLoginMes = "Sai tài khoản hoặc mật khẩu, vui lòng kiểm tra lại";
+          emit(state.copyWith(
+              loadStatus: LoadStatus.failure, errorMessage: errorLoginMes));
+        }
       }
     } catch (e) {
-      emit(state.copyWith(
-          loadStatus: LoadStatus.failure, errorMessage: e.toString()));
+      if (e.toString() ==
+          "DioException [bad response]: The request returned an invalid status code of 401.") {
+        errorLoginMes = "Sai tài khoản hoặc mật khẩu, vui lòng kiểm tra lại";
+        emit(state.copyWith(
+            loadStatus: LoadStatus.failure, errorMessage: errorLoginMes));
+      }
     }
   }
 

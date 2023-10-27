@@ -7,5 +7,5 @@ class GlobalData {
   int userId = 0;
   String fCMToken = "";
   bool isNoti = true;
-  String language = "";
+  String language = "en";
 }

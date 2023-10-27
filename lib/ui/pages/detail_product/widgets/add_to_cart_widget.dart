@@ -44,7 +44,7 @@ addToCartPopUp(AnimationController addToCartPopUpAnimationController, Function()
                             child: const Text(
                               "Go to cart",
                               style: TextStyle(
-                                color: Color(0xff535960),
+                                color: Colors.blueGrey,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
                               ),

@@ -253,7 +253,6 @@ Future<List<NotiModel>> getAllNotifications(int userId) async {
   final db = await instance.database;
   final List<Map<String, dynamic>> maps = await db.query(tableNotifications,where: 'userId = ?',
       whereArgs: [userId],);
-  
   return List.generate(maps.length, (i) {
     return NotiModel.fromMap(maps[i]);
   });

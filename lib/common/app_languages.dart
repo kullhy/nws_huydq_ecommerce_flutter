@@ -32,7 +32,8 @@ class LocalString extends Translations {
           'total': "Tổng",
           'item': "sản phẩm",
           'proceed_to_checkout': "Thanh toán",
-
+          'delete_cart':"XOÁ SẢN PHẨM",
+          'confirm_delete':"Bạn có chắc chắn muốn xoá sản phẩm này không?",
           //home
           'product': "sản phẩm",
 
@@ -58,6 +59,7 @@ class LocalString extends Translations {
           'confirm_password': "Xác nhận mật khẩu",
           'policy':
               "Để tạo một tài khoản, bạn phải đồng ý với chúng và điều kiện của chúng tôi",
+            
         },
         'en': {
           'upload_image': "Upload image",
@@ -86,6 +88,8 @@ class LocalString extends Translations {
           'total': "Total",
           'item': "item",
           'proceed_to_checkout': "Proceed to Checkout",
+                    'delete_cart':"DELETE CART",
+          'confirm_delete':"Are you sure you want to delete this cart?",
           //home
           'product': "product",
 

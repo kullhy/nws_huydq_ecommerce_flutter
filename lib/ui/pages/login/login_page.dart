@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:nws_huydq_ecommerce_flutter/common/app_images.dart';
 import 'package:nws_huydq_ecommerce_flutter/common/app_text_styles.dart';
 import 'package:nws_huydq_ecommerce_flutter/models/enums/load_status.dart';
 import 'package:nws_huydq_ecommerce_flutter/ui/pages/login/login_cubit.dart';
@@ -177,17 +178,17 @@ class _LoginViewState extends State<LoginView> {
                     height: 8,
                   ),
                   const LoginWithButton(
-                      content: "Facebook", image: "assets/icons/fb_icon.png"),
+                      content: "Facebook", image: AppImages.fbIcon),
                   const SizedBox(
                     height: 12,
                   ),
                   const LoginWithButton(
-                      content: "Google", image: "assets/icons/google_icon.png"),
+                      content: "Google", image: AppImages.ggIcon),
                   const SizedBox(
                     height: 12,
                   ),
                   const LoginWithButton(
-                      content: "Apple", image: "assets/icons/apple_icon.png"),
+                      content: "Apple", image: AppImages.appleIcon),
                 ],
               ),
             ),

@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
+
 class NotiModel {
   int id;
   String title;
@@ -21,7 +23,7 @@ class NotiModel {
       title: map['title'],
       subTitle: map['subtitle'],
       image: map['image'],
-      userId: map['userId'],
+      userId: map['userId']??GlobalData.instance.userId,
       createDate:
           map['createDate'] != null ? DateTime.parse(map['createDate']) : null,
     );

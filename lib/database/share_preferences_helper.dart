@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nws_huydq_ecommerce_flutter/global/global_data.dart';
@@ -16,7 +18,6 @@ class SharedPreferencesHelper {
   static const _isNoti = 'isNoti';
 
   static const _language = 'language';
-
 
   //Get onboard
   static Future<bool> isOnboardCompleted() async {
@@ -58,9 +59,7 @@ class SharedPreferencesHelper {
       var locale = Locale(GlobalData.instance.language);
       Get.updateLocale(locale);
     } catch (e) {
-      GlobalData.instance.language = "en";
-      var locale = Locale(GlobalData.instance.language);
-      Get.updateLocale(locale);
+      log(e.toString());
     }
   }
 

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -38,10 +39,12 @@ class DetailCategoryView extends StatefulWidget {
 class _DetailCategoryViewState extends State<DetailCategoryView> {
   late DetailCategoryCubit _detailCategoryCubit;
 
+
   @override
   void initState() {
     _detailCategoryCubit = context.read<DetailCategoryCubit>();
     super.initState();
+    
   }
 
   @override
@@ -128,27 +131,31 @@ class _DetailCategoryViewState extends State<DetailCategoryView> {
                       state.products.isNotEmpty
                           ? SingleChildScrollView(
                               child: Container(
-                              alignment: Alignment.topLeft,
-                              child: Wrap(
-                                alignment: WrapAlignment.start,
-                                spacing: size.width * 0.2 - 50,
-                                runSpacing: 16,
-                                children: List.generate(state.products.length,
+                                alignment: Alignment.topLeft,
+                                child: Wrap(
+                                  alignment: WrapAlignment.start,
+                                  spacing: size.width * 0.2 - 50,
+                                  runSpacing: 16,
+                                  children: List.generate(
+                                    state.products.length,
                                     (index) {
-                                  return ProductItem(
-                                    product: state.products[index],
-                                    ontap: () {
-                                      state.products[index].category =
+                                    
+                                      return ProductItem(
+                                        product: state.products[index],
+                                        ontap: () {
+                                          state.products[index].category =
+                                              _detailCategoryCubit
+                                                  .detailCategory.category;
                                           _detailCategoryCubit
-                                              .detailCategory.category;
-                                      _detailCategoryCubit
-                                          .openDetailProductPage(
-                                              state.products[index]);
+                                              .openDetailProductPage(
+                                                  state.products[index]);
+                                        },
+                                      );
                                     },
-                                  );
-                                }),
+                                  ),
+                                ),
                               ),
-                            ))
+                            )
                           : Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

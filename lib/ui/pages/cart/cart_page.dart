@@ -50,114 +50,113 @@ class _CartViewState extends State<CartView> {
       body: SafeArea(
         child: BlocBuilder<CartCubit, CartState>(
           builder: (context, state) {
-            if (state.loadStatus == LoadStatus.initial) {
+            if (state.loadStatus == LoadStatus.loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
             } else {
-              return WillPopScope(
-                onWillPop: () async {
-                  Navigator.pop(context);
-                  return true;
-                },
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.canPop(context)
-                                    ? Navigator.pop(context)
-                                    : _cartCubit.navigator.openMainPage();
-                              },
-                              child: SvgPicture.asset(
-                                AppSVGs.icBack,
-                                height: 32,
-                                width: 32,
-                              ),
+              return Column(
+                children: [
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.canPop(context)
+                                  ? Navigator.pop(context)
+                                  : _cartCubit.navigator.openMainPage();
+                            },
+                            child: SvgPicture.asset(
+                              AppSVGs.icBack,
+                              height: 32,
+                              width: 32,
                             ),
                           ),
-                          const SizedBox(
-                            height: 24,
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Text(
+                            "my_cart".tr,
+                            style: AppTextStyle.blackS18Bold,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: Text(
-                              "my_cart".tr,
-                              style: AppTextStyle.blackS18Bold,
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 8,
-                          ),
-                          state.productCarts.isEmpty
-                              ? Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "OPPS",
-                                        style: AppTextStyle.blackS24W900,
-                                      ),
-                                      Image.asset(
-                                        AppImages.noCart,
-                                        height: 120,
-                                      )
-                                    ],
-                                  ),
-                                )
-                              : Expanded(
-                                  // height: size.height * 0.5,
-                                  child: ListView.builder(
-                                    itemCount: state.productCarts.length,
-                                    itemBuilder:
-                                        (BuildContext context, int index) {
-                                      return CartItemWidget(
-                                        size: size,
-                                        productCart: state.productCarts[index],
-                                        cartCubit: _cartCubit,
-                                      );
-                                    },
-                                  ),
-                                )
-                        ],
-                      ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        state.productCarts.isEmpty
+                            ? Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "OPPS",
+                                      style: AppTextStyle.blackS24W900,
+                                    ),
+                                    Image.asset(
+                                      AppImages.noCart,
+                                      height: 120,
+                                    )
+                                  ],
+                                ),
+                              )
+                            : Expanded(
+                                // height: size.height * 0.5,
+                                child: ListView.builder(
+                                  itemCount: state.productCarts.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return CartItemWidget(
+                                      size: size,
+                                      productCart: state.productCarts[index],
+                                      cartCubit: _cartCubit,
+                                    );
+                                  },
+                                ),
+                              )
+                      ],
                     ),
-                    // const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "${'total'.tr} (${state.productCarts.length} ${'item'.tr}):",
-                            style: AppTextStyle.tintS14Bold,
-                          ),
-                          Text(
-                            r"$" "${state.totalPrice}",
-                            style: AppTextStyle.blackS18W800,
-                          ),
-                        ],
-                      ),
+                  ),
+                  // const Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "${'total'.tr} (${state.productCarts.length} ${'item'.tr}):",
+                          style: AppTextStyle.tintS14Bold,
+                        ),
+                        Text(
+                          r"$" "${state.totalPrice}",
+                          style: AppTextStyle.blackS18W800,
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    Container(
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  InkWell(
+                    onTap: state.productCarts.isEmpty ? null : () {},
+                    child: Container(
                       margin: const EdgeInsets.symmetric(horizontal: 24),
                       padding: const EdgeInsets.only(left: 20, right: 10),
                       width: double.infinity,
                       height: 50,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.black,
+                        color: state.productCarts.isEmpty
+                            ? Colors.grey
+                            : Colors.black,
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -172,11 +171,11 @@ class _CartViewState extends State<CartView> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    )
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  )
+                ],
               );
             }
           },

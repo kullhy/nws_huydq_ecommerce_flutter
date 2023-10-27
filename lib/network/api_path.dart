@@ -16,6 +16,6 @@ class ApiPath {
   static const String getListCategory =
       "$baseUrl$listCategories?offset=0&limit=10";
   String getListProduct(int categoryId) {
-    return "$baseUrl$listCategories$categoryId/products?offset=0&limit=10";
+    return "$baseUrl$listCategories$categoryId/products?offset=0&limit=100";
   }
 }
